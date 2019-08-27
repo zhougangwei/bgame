@@ -3,4 +3,11 @@
     <string name="cancel">取消</string>
     <string name="confirm">确定</string>
     <string name="want_to_log_out">是否确认退出</string>
+    <string name="clear_cache">clear cache</string>
+    <string name="account_management">Account management</string>
+    <string name="nick_name">Nick Name</string>
+    <string name="mobile_number">mobile number</string>
+    <string name="change_password">change password</string>
+    <string name="current_version">Current Version</string>
+    <string name="user_agreement">User Agreement</string>
 </resources>

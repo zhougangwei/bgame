@@ -5,11 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    tools:context=".MainActivity">
+>
 
     <include
         android:id="@+id/include"
-        layout="@layout/include_top_toolbar_iv" />
+        layout="@layout/include_top_toolbar" />
 
 
     <LinearLayout
@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginEnd="10dp"
-            android:src="@drawable/ic_next" />
+            android:src="@drawable/btn_forward" />
     </LinearLayout>
 
 
@@ -77,7 +77,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginEnd="10dp"
-            android:src="@drawable/ic_next" />
+            android:src="@drawable/btn_forward" />
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
@@ -105,7 +105,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginEnd="10dp"
-            android:src="@drawable/ic_next" />
+            android:src="@drawable/btn_forward" />
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
@@ -133,7 +133,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginEnd="10dp"
-            android:src="@drawable/ic_next" />
+            android:src="@drawable/btn_forward" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

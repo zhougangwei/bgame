@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_bg"
+    tools:context="com.pay.administrator.bgame.activity.LoginActivity">
+
+
+    <ImageView
+        android:id="@+id/iv_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_facevook"
+        app:layout_constraintEnd_toStartOf="@+id/iv_facevook"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/iv_facevook"
+        app:srcCompat="@drawable/login_btn_mobile"/>
+
+    <ImageView
+        android:id="@+id/iv_facevook"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="208dp"
+        app:layout_constraintStart_toEndOf="@id/iv_phone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/iv_google"
+        app:srcCompat="@drawable/login_btn_facebook"/>
+
+    <ImageView
+        android:id="@+id/iv_google"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/iv_facevook"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_facevook"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/iv_facevook"
+        app:srcCompat="@drawable/login_btn_google"/>
+
+    <include
+
+        layout="@layout/include_terms_of_use"/>
+</android.support.constraint.ConstraintLayout>

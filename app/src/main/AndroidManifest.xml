@@ -28,6 +28,8 @@
         </activity>
         <activity android:name=".activity.MylikeActivity">
         </activity>
+        <activity android:name=".activity.LoginActivity"/>
+        <activity android:name=".activity.LoginMobileActivity"/>
     </application>
 
 </manifest>

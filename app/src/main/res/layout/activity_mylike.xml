@@ -6,5 +6,5 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.pay.administrator.bgame.activity.MylikeActivity">
-<include layout="@layout/include_title"></include>
+<include layout="@layout/include_top_toolbar"></include>
 </android.support.constraint.ConstraintLayout>
