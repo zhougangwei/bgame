@@ -5,6 +5,8 @@ import android.content.Context;
 import android.os.Process;
 import android.text.TextUtils;
 
+import com.pay.administrator.bgame.base.Contact;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -122,13 +124,11 @@ public class ToolUtils {
     public static String getLanguage() {
         String language = Locale.getDefault().getLanguage();
         if (language.equals("zh") || language.equals("CN") || language.equals("zh-CN")) {
-            return "zh";
-        }else if(language.equals("th")){
-            return "th";
+            return Contact.LANGUAGE_CHINA;
         }else if(language.equals("ar")){
-            return "ar";
+            return Contact.LANGUAGE_AR;
         }else {
-            return "en";
+            return Contact.LANGUAGE_ENGLISH;
         }
     }
 }

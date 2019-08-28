@@ -6,7 +6,6 @@ package com.pay.administrator.bgame.bean;
 
 public class BaseBean {
     public int code;
-    public String message;
 
     public int getCode() {
         return code;
@@ -17,13 +16,6 @@ public class BaseBean {
     }
 
 
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
 
 
 }

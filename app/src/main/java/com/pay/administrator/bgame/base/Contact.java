@@ -40,4 +40,10 @@ public class Contact {
 
     public static final int REQUEST_CHOOSE_COUNTRY = 666;
     public static final int REQUEST_PHONE = 668;
+
+    public static final String LANGUAGE_CHINA = "zh";
+    public static final String LANGUAGE_ENGLISH = "en";
+    public static final String LANGUAGE_AR = "ar";
+
+
 }

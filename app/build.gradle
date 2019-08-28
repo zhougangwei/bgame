@@ -8,7 +8,7 @@ keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
     defaultConfig {
-        applicationId "chat.hala.hala"
+        applicationId "com.pay.administrator.bgame"
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode rootProject.ext.android.versionCode

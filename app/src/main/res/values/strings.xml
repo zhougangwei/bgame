@@ -10,4 +10,10 @@
     <string name="change_password">change password</string>
     <string name="current_version">Current Version</string>
     <string name="user_agreement">User Agreement</string>
+    <string name="send_the_verification_code">Send the verification code</string>
+    <string name="please_enter_mobile_number">Please enter Mobile number</string>
+    <string name="click_the_button_above_and_your_phone_will_receive_a_text_message_from_namol">Click the button above and your phone will receive a text message from Namol</string>
+    <string name="next">next</string>
+    <string name="congfirm">Congfirm</string>
+    <string name="feedback">Feedback</string>
 </resources>

@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#111111"
+
+    tools:context="com.pay.administrator.bgame.activity.LoginActivity">
+
+    <include
+        android:id="@+id/include2"
+        layout="@layout/include_top_toolbar"
+        android:text="@string/please_enter_mobile_number" />
+
+    <TextView
+        android:id="@+id/tv1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="center"
+        android:text="Please fill in the 6-digit verification code
+sent to +8613558812356"
+        android:textColor="#888888"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include2" />
+
+    <LinearLayout
+        android:id="@+id/ll_register_code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="64dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/tv1">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="18dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/et_code_1"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxEms="1"
+                android:maxLength="1"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="45sp"
+                android:textStyle="bold"
+                tools:hint="0" />
+
+            <View
+                android:layout_width="40dp"
+                android:layout_height="2dp"
+                android:layout_marginTop="8dp"
+                android:background="#666666" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="18dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/et_code_2"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxEms="1"
+                android:maxLength="1"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="45sp"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="40dp"
+                android:layout_height="2dp"
+                android:layout_marginTop="8dp"
+                android:background="#666666" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="18dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/et_code_3"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxEms="1"
+                android:maxLength="1"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="45sp"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="40dp"
+                android:layout_height="2dp"
+                android:layout_marginTop="8dp"
+                android:background="#666666" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="18dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/et_code_4"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxEms="1"
+                android:maxLength="1"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="45sp"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="40dp"
+                android:layout_height="2dp"
+                android:layout_marginTop="8dp"
+                android:background="#666666" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="18dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/et_code_5"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxEms="1"
+                android:maxLength="1"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="45sp"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="40dp"
+                android:layout_height="2dp"
+                android:layout_marginTop="8dp"
+                android:background="#666666" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/et_code_6"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxEms="1"
+                android:maxLength="1"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="45sp"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="40dp"
+                android:layout_height="2dp"
+                android:layout_marginTop="8dp"
+                android:background="#666666" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <include
+        android:id="@+id/tv_register_code_next"
+        layout="@layout/include_submit"
+        android:layout_width="0dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="93dp"
+        android:layout_marginEnd="27dp"
+        android:text="@string/next"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll_register_code" />
+
+    <TextView
+        android:id="@+id/tv_forget"
+        android:layout_width="238dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="center_horizontal"
+        android:text="Didn't receive the text message?
+Please click resend after 55s"
+        android:textColor="#FF888888"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_register_code_next" />
+
+
+
+</android.support.constraint.ConstraintLayout>
