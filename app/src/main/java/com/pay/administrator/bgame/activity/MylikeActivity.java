@@ -11,7 +11,7 @@ public class MylikeActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-
+//
     }
 
     @Override
