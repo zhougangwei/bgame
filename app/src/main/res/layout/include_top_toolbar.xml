@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="64dp"
-    android:background="@drawable/bg_nav"
+    android:background="@drawable/bg_my_colorful"
     android:orientation="vertical">
 
 
@@ -18,7 +18,7 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="15dp"
             android:padding="10dp"
-            android:src="@drawable/ic_back"
+            android:src="@drawable/btn_return"
             android:textSize="15sp" />
 
         <TextView

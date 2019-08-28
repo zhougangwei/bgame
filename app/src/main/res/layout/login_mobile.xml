@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
+
+    <include
+        android:id="@+id/include2"
+        layout="@layout/include_top_toolbar"/>
+
+    <EditText
+        android:id="@+id/et_mobile_num"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="27dp"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/bg_login_input"
+        android:ems="10"
+        android:hint="Mobile number/ Account number"
+        android:inputType="phone"
+        android:paddingEnd="21dp"
+        android:paddingStart="21dp"
+        android:textColor="@color/white"
+        android:textColorHint="#FF666666"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include2"/>
+
+
+    <EditText
+        android:id="@+id/et_pwd"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_login_input"
+        android:ems="10"
+        android:hint="Mobile number/ Account number"
+        android:inputType="phone"
+        android:paddingEnd="21dp"
+        android:paddingStart="21dp"
+        android:textColor="@color/white"
+        android:textColorHint="#FF666666"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/et_mobile_num"
+        app:layout_constraintHorizontal_bias="0.409"
+        app:layout_constraintStart_toStartOf="@+id/et_mobile_num"
+        app:layout_constraintTop_toBottomOf="@+id/et_mobile_num"/>
+
+    <include
+        android:id="@+id/include3"
+        layout="@layout/include_submit"
+        android:layout_width="0dp"
+        android:layout_height="44dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="93dp"
+        android:text="login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_pwd"/>
+
+    <TextView
+        android:id="@+id/tv_forget"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        android:text="Forget password ?"
+        android:textColor="#FF888888"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include3"/>
+
+    <include
+        android:textColor="#FF888888"
+        layout="@layout/include_terms_of_use"/>
+</android.support.constraint.ConstraintLayout>
