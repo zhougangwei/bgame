@@ -26,7 +26,7 @@ public class SPUtil {
 
     private volatile static Context sContext;
 
-    public static SPUtil getInstance(Context context) {
+    public static SPUtil getInstance() {
         if (spu == null) {
             synchronized (SPUtil.class) {
                 if (spu == null) {

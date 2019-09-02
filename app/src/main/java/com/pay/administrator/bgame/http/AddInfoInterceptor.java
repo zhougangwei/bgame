@@ -30,7 +30,7 @@ public class AddInfoInterceptor implements Interceptor {
     public Response intercept(Chain chain) throws IOException {
         final Request.Builder builder = chain.request().newBuilder();
         builder.addHeader("Content-Type", "application/json");
-        String token = SPUtil.getInstance(context).getString(Contact.TOKEN, "");
+        String token = SPUtil.getInstance().getString(Contact.TOKEN, "");
         if (!TextUtils.isEmpty(token)) {
             builder.addHeader("Authorization","Bearer "+ token);
         }

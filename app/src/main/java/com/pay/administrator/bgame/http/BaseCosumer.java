@@ -31,6 +31,7 @@ public  abstract class BaseCosumer< T extends BaseBean> implements Observer<T> {
         try{
             LogUtils.e("BaseCosumer", e.getMessage());
         }catch (Exception e2){
+            e2.printStackTrace();
             LogUtils.e("BaseCosumer", e2.getMessage()+"11");
         }
     }

@@ -10,6 +10,7 @@ import okhttp3.RequestBody;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
@@ -22,5 +23,6 @@ public interface HttpRequest {
     Observable<TagBean> getTagList(
     );
 
-
+    @GET("/namol/api/app/v1/movie/{vid}")
+    Observable<BaseBean> getVideoDetail(@Path("vid")String vid);
 }

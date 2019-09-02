@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <chat.hala.hala.wight.banner.Banner
+    <com.pay.administrator.bgame.wight.banner.Banner
         android:id="@+id/banner"
         android:layout_width="match_parent"
         android:layout_height="110dp"
@@ -12,7 +12,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-    </chat.hala.hala.wight.banner.Banner>
+    </com.pay.administrator.bgame.wight.banner.Banner>
 
 
 </android.support.constraint.ConstraintLayout>

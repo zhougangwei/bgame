@@ -120,7 +120,8 @@ public class HomeFragment extends BaseFragment {
         } else {
             page++;
         }
-        RetrofitFactory.getInstance().getTagList().observeOn(Schedulers.io())
+        RetrofitFactory.getInstance().getTagList()
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new BaseCosumer<TagBean>() {
                     @Override
@@ -154,6 +155,5 @@ public class HomeFragment extends BaseFragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        unbinder.unbind();
     }
 }

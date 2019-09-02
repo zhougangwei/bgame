@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="49dp"
         android:layout_alignParentBottom="true"
-        android:background="@color/white">
+        android:background="@null">
 
         <ImageView
             android:id="@+id/iv_home"
