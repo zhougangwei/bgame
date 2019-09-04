@@ -45,7 +45,6 @@ public class VideoActivity extends BaseActivity {
                         getMediaSource();
                     }
                 });
-
     }
 
     private void getMediaSource() {
