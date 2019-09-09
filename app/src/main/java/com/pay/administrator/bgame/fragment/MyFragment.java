@@ -10,8 +10,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.pay.administrator.bgame.R;
+import com.pay.administrator.bgame.activity.MylikeActivity;
 import com.pay.administrator.bgame.activity.SettingActivity;
 import com.pay.administrator.bgame.base.BaseFragment;
+import com.pay.administrator.bgame.http.RetrofitFactory;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -87,11 +89,15 @@ public class MyFragment extends BaseFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        unbinder = ButterKnife.bind(this, rootView);
-        return rootView;
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        getLike();
+    }
+
+    private void getLike() {
+
+
+
     }
 
     @Override
@@ -107,6 +113,7 @@ public class MyFragment extends BaseFragment {
                 startActivity(new Intent(getActivity(), SettingActivity.class));
                 break;
             case R.id.rl_like:
+                startActivity(new Intent(getActivity(), MylikeActivity.class));
                 break;
             case R.id.rl_vip:
                 break;

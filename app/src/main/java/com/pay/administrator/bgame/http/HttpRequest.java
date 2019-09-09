@@ -19,10 +19,27 @@ import retrofit2.http.Query;
 
 public interface HttpRequest {
 
-    @GET("/namol/api/app/v1/tag")
+    @GET("/namol/api/app/v1/movie")
     Observable<TagBean> getTagList(
     );
 
     @GET("/namol/api/app/v1/movie/{vid}")
     Observable<BaseBean> getVideoDetail(@Path("vid")String vid);
+
+    /**
+     * @param num which page
+     */
+    @GET("/namol/api/app/v1/search")
+    Observable<BaseBean> searchVideo(@Query("num") int num,
+    @Query("tag")int tag,@Query("play")boolean play,@Query("newest")boolean newest,@Query("like")boolean like
+    );
+
+    @GET("/namol/api/app/v1/find/{page}")
+    Observable<BaseBean> getFindVideos(@Path("page") int page);
+
+    @POST("/namol/api/app/v1/movie/like/{vid}")
+    Observable<BaseBean> addVideoLike(@Path("vid")String vid);
+
+    @POST("/namol/api/app/v1/movie/share/{vid}")
+    Observable<BaseBean> addShare(@Path("vid")String vid);
 }

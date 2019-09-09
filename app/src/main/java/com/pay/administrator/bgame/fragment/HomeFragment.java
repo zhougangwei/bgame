@@ -2,6 +2,7 @@ package com.pay.administrator.bgame.fragment;
 
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
@@ -49,7 +50,7 @@ public class HomeFragment extends BaseFragment {
     protected void initView() {
 
         tagAdapter = new HotCallAdapter(R.layout.item_home_detail,dataList);
-        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 4);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL,false);
         rv.setLayoutManager(layoutManager);
         rv.setAdapter(tagAdapter);
         View headView = View.inflate(getActivity(), R.layout.item_hotfragment_header, null);

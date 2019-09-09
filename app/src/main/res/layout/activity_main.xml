@@ -15,11 +15,12 @@
 
 
     <RelativeLayout
+
         android:id="@+id/rl1"
         android:layout_width="match_parent"
         android:layout_height="49dp"
         android:layout_alignParentBottom="true"
-        android:background="@null">
+        android:background="#191812">
 
         <ImageView
             android:id="@+id/iv_home"
@@ -33,7 +34,7 @@
             android:paddingEnd="10dp"
             android:paddingStart="10dp"
             android:paddingTop="5dp"
-            android:src="@drawable/ic_launcher_background"/>
+            android:src="@drawable/selector_home"/>
 
         <ImageView
             android:layout_width="8dp"
@@ -52,7 +53,7 @@
             android:paddingEnd="10dp"
             android:paddingStart="10dp"
             android:paddingTop="5dp"
-            android:src="@drawable/ic_launcher_background"/>
+            android:src="@drawable/selector_find"/>
 
         <ImageView
             android:id="@+id/iv_my"
@@ -65,7 +66,7 @@
             android:paddingEnd="10dp"
             android:paddingStart="10dp"
             android:paddingTop="5dp"
-            android:src="@drawable/ic_launcher_background"/>
+            android:src="@drawable/selector_me"/>
 
     </RelativeLayout>
 
