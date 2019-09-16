@@ -1,8 +1,8 @@
 package com.pay.administrator.bgame.base;
 
 public class Contact {
-    public static final String UPLOAD_HOST = "http://263d6t1992.wicp.vip";
-    public static final String HOST        = "http://263d6t1992.wicp.vip";
+    public static final String UPLOAD_HOST = "http://60.176.177.211:9016/";
+    public static final String HOST        = "http://60.176.177.211:9016/";
 
     public static final String TOKEN   = "token";
     public static final String RONG_TOKEN   = "rong_token";

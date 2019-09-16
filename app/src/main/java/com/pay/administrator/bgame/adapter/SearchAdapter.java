@@ -24,19 +24,6 @@ public class SearchAdapter extends BaseQuickAdapter<TagBean.DataBean, BaseViewHo
 
     @Override
     protected void convert(BaseViewHolder helper, TagBean.DataBean item) {
-        List<TagBean.DataBean.MovieBean> bestMovie = item.getBestMovie();
-        List<TagBean.DataBean.MovieBean> recMovie = item.getRecMovie();
-        List<TagBean.DataBean.MovieBean> data=new ArrayList<>();
-        if (bestMovie!=null) {
-            data.addAll(bestMovie);
-        }
-        if (recMovie!=null) {
-            data.addAll(recMovie);
-        }
-        RecyclerView rv = helper.getView(R.id.rv);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext,3);
-        rv.setLayoutManager(gridLayoutManager);
-        TagItemVideoAdapter tagItemVideoAdapter = new TagItemVideoAdapter(R.layout.item_home_video, data);
-        rv.setAdapter(tagItemVideoAdapter);
+
     }
 }

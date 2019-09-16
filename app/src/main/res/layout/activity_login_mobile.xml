@@ -12,6 +12,7 @@
         layout="@layout/include_top_toolbar"/>
 
     <EditText
+        android:gravity="center_vertical"
         android:id="@+id/et_mobile_num"
         android:layout_width="0dp"
         android:layout_height="48dp"
@@ -33,13 +34,14 @@
 
 
     <EditText
+        android:gravity="center_vertical"
         android:id="@+id/et_pwd"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/bg_login_input"
         android:ems="10"
-        android:hint="Mobile number/ Account number"
+        android:hint="Please enter Password"
         android:inputType="phone"
         android:paddingEnd="21dp"
         android:paddingStart="21dp"

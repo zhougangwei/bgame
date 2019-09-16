@@ -13,10 +13,12 @@ import com.pay.administrator.bgame.R;
 import com.pay.administrator.bgame.activity.VideoActivity;
 import com.pay.administrator.bgame.adapter.SearchAdapter;
 import com.pay.administrator.bgame.base.BaseFragment;
+import com.pay.administrator.bgame.base.Contact;
 import com.pay.administrator.bgame.bean.BaseBean;
 import com.pay.administrator.bgame.bean.TagBean;
 import com.pay.administrator.bgame.http.BaseCosumer;
 import com.pay.administrator.bgame.http.RetrofitFactory;
+import com.pay.administrator.bgame.utils.ResultUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,11 +46,14 @@ public class SearchFragment extends BaseFragment {
     private boolean isLoadMore=true;
     public List<TagBean.DataBean> dataList=new ArrayList<>();
     private String TAG="SearchFragment";
+    private String content;
+    private SearchAdapter searchAdapter;
 
     @Override
     protected void initView() {
         tvTitle.setText("Find");
-        SearchAdapter searchAdapter = new SearchAdapter(R.layout.item_search_video,dataList);
+        ivBack.setVisibility(View.GONE);
+        searchAdapter = new SearchAdapter(R.layout.item_search_video,dataList);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL,false);
         rv.setLayoutManager(layoutManager);
         rv.setAdapter(searchAdapter);
@@ -76,7 +81,7 @@ public class SearchFragment extends BaseFragment {
         searchAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                VideoActivity.startVideo(getActivity(),dataList.get(position).get);
+                VideoActivity.startVideo(getActivity(),dataList.get(position).getId());
             }
         });
     }
@@ -100,19 +105,36 @@ public class SearchFragment extends BaseFragment {
         } else {
             page++;
         }
-        RetrofitFactory.getInstance().getFindVideos(page)
+        RetrofitFactory.getInstance().getFindVideos(page,Contact.PAGE_SIZE)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseCosumer<BaseBean>() {
+                .subscribe(new BaseCosumer<TagBean>() {
                     @Override
-                    public void onGetData(BaseBean tagbean) {
+                    public void onGetData(TagBean tagbean) {
+                        if (!ResultUtils.cheekSuccess(tagbean)) {
+                            searchAdapter.loadMoreFail();
+                            return;
+                        }
+                        if (tagbean.getData()==null||tagbean.getData().size()==0) {
+                            searchAdapter.loadMoreEnd();
+                            isLoadMore = false;
+                        } else {
+                            searchAdapter.loadMoreComplete();
+                        }
+                        if (isRefresh) {
+                            dataList.clear();
+                        }
+                        dataList.addAll(tagbean.getData());
+                        searchAdapter.notifyDataSetChanged();
+                        searchAdapter.disableLoadMoreIfNotFullPage(rv);
 
                     }
                 });
     }
 
     public void search() {
-        RetrofitFactory.getInstance().searchVideo(1)
+
+        RetrofitFactory.getInstance().searchVideo(1,20, content)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new BaseCosumer<BaseBean>() {

@@ -12,6 +12,7 @@ import com.pay.administrator.bgame.R;
 import com.pay.administrator.bgame.adapter.GlideImageLoader;
 import com.pay.administrator.bgame.adapter.HotCallAdapter;
 import com.pay.administrator.bgame.base.BaseFragment;
+import com.pay.administrator.bgame.bean.HomeMovieBean;
 import com.pay.administrator.bgame.bean.TagBean;
 import com.pay.administrator.bgame.http.BaseCosumer;
 import com.pay.administrator.bgame.http.RetrofitFactory;
@@ -42,17 +43,32 @@ public class HomeFragment extends BaseFragment {
     Unbinder unbinder;
     private HotCallAdapter tagAdapter;
     private int page;
-    private boolean isLoadMore=true;
+    private boolean isLoadMore = true;
 
-    public List<TagBean.DataBean> dataList=new ArrayList<>();
-    private List<String> imagesList=new ArrayList<>();
+    public List<HomeMovieBean.DataBean> dataList = new ArrayList<>();
+    private List<String> imagesList = new ArrayList<>();
+
     @Override
     protected void initView() {
 
-        tagAdapter = new HotCallAdapter(R.layout.item_home_detail,dataList);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL,false);
-        rv.setLayoutManager(layoutManager);
+        tagAdapter = new HotCallAdapter(dataList);
+        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 4);
         rv.setAdapter(tagAdapter);
+        rv.setLayoutManager(layoutManager);
+        layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                if (position == 0) {
+                    return 4;
+                }
+                if (position > 8) {
+                    return 4;
+                }
+                return 1;
+            }
+        });
+
+
         View headView = View.inflate(getActivity(), R.layout.item_hotfragment_header, null);
         banner = headView.findViewById(R.id.banner);
         tagAdapter.addHeaderView(headView, 0);
@@ -83,10 +99,10 @@ public class HomeFragment extends BaseFragment {
 
     private void getBannerData() {
         imagesList.clear();
-        imagesList.add( "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1561969870482&di=5c1c1ce287af862e3165902039c59cbd&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20160522%2F29bb43e8e4d44c94846ae13520d15f88_th.jpg");
-        imagesList.add( "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1561969870482&di=5c1c1ce287af862e3165902039c59cbd&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20160522%2F29bb43e8e4d44c94846ae13520d15f88_th.jpg");
-        imagesList.add( "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1561969870482&di=5c1c1ce287af862e3165902039c59cbd&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20160522%2F29bb43e8e4d44c94846ae13520d15f88_th.jpg");
-        imagesList.add( "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1561969870482&di=5c1c1ce287af862e3165902039c59cbd&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20160522%2F29bb43e8e4d44c94846ae13520d15f88_th.jpg");
+        imagesList.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1561969870482&di=5c1c1ce287af862e3165902039c59cbd&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20160522%2F29bb43e8e4d44c94846ae13520d15f88_th.jpg");
+        imagesList.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1561969870482&di=5c1c1ce287af862e3165902039c59cbd&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20160522%2F29bb43e8e4d44c94846ae13520d15f88_th.jpg");
+        imagesList.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1561969870482&di=5c1c1ce287af862e3165902039c59cbd&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20160522%2F29bb43e8e4d44c94846ae13520d15f88_th.jpg");
+        imagesList.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1561969870482&di=5c1c1ce287af862e3165902039c59cbd&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20160522%2F29bb43e8e4d44c94846ae13520d15f88_th.jpg");
         banner();
     }
 
@@ -121,22 +137,23 @@ public class HomeFragment extends BaseFragment {
         } else {
             page++;
         }
-        RetrofitFactory.getInstance().getTagList()
+        RetrofitFactory.getInstance().getHomeMovie()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseCosumer<TagBean>() {
+                .subscribe(new BaseCosumer<HomeMovieBean>() {
                     @Override
                     public void onError(Throwable e) {
                         super.onError(e);
                         tagAdapter.loadMoreFail();
                     }
+
                     @Override
-                    public void onGetData(TagBean tagbean) {
-                        if (!ResultUtils.cheekSuccess(tagbean)) {
+                    public void onGetData(HomeMovieBean homeMovieBean) {
+                        if (!ResultUtils.cheekSuccess(homeMovieBean)) {
                             tagAdapter.loadMoreFail();
                             return;
                         }
-                        if (tagbean.getData()==null||tagbean.getData().size()==0) {
+                        if (homeMovieBean.getData() == null || homeMovieBean.getData().size() == 0) {
                             tagAdapter.loadMoreEnd();
                             isLoadMore = false;
                         } else {
@@ -145,7 +162,24 @@ public class HomeFragment extends BaseFragment {
                         if (isRefresh) {
                             dataList.clear();
                         }
-                        dataList.addAll(tagbean.getData());
+                        dataList.addAll(homeMovieBean.getData());
+                        HomeMovieBean.DataBean dataBean = new HomeMovieBean.DataBean();
+                        HomeMovieBean.DataBean.TypeBean typeBean = new HomeMovieBean.DataBean.TypeBean();
+                        typeBean.setNameEn("All");
+                        typeBean.setNameAl("All");
+                        typeBean.setNameZh("All");
+                        dataBean.setType(typeBean);
+                        dataList.add(7, dataBean);
+                        for (int i = 0; i < dataList.size(); i++) {
+                            if (i < 8) {
+                                dataList.get(i).setDataType(HotCallAdapter.TOP_EIGHT);
+                            } else {
+                                dataList.get(i).setDataType(HotCallAdapter.BOTTOM_ELSE);
+                            }
+
+                        }
+
+
                         tagAdapter.notifyDataSetChanged();
                         tagAdapter.disableLoadMoreIfNotFullPage(rv);
                     }

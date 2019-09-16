@@ -19,15 +19,15 @@ import java.util.List;
  * Created by kiddo on 2018/1/9.
  */
 
-public class TagItemVideoAdapter extends BaseQuickAdapter<TagBean.DataBean.MovieBean, BaseViewHolder> {
+public class TagItemVideoAdapter extends BaseQuickAdapter<TagBean.DataBean, BaseViewHolder> {
 
 
-    public TagItemVideoAdapter(int layoutIds, List<TagBean.DataBean.MovieBean> countryDatas) {
+    public TagItemVideoAdapter(int layoutIds, List<TagBean.DataBean> countryDatas) {
         super(layoutIds, countryDatas);
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, TagBean.DataBean.MovieBean item) {
+    protected void convert(BaseViewHolder helper, TagBean.DataBean item) {
         helper.setText(R.id.tv_num,item.getPlayCount()+"");
         String content="";
         switch (ToolUtils.getLanguage()) {
