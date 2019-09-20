@@ -1,19 +1,23 @@
 package com.pay.administrator.bgame.fragment;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.blankj.utilcode.utils.LogUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.pay.administrator.bgame.R;
+import com.pay.administrator.bgame.activity.SearchActivity;
 import com.pay.administrator.bgame.adapter.GlideImageLoader;
 import com.pay.administrator.bgame.adapter.HotCallAdapter;
 import com.pay.administrator.bgame.base.BaseFragment;
 import com.pay.administrator.bgame.bean.HomeMovieBean;
-import com.pay.administrator.bgame.bean.TagBean;
 import com.pay.administrator.bgame.http.BaseCosumer;
 import com.pay.administrator.bgame.http.RetrofitFactory;
 import com.pay.administrator.bgame.utils.ResultUtils;
@@ -25,6 +29,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -41,12 +47,15 @@ public class HomeFragment extends BaseFragment {
     @BindView(R.id.swrl)
     SwipeRefreshLayout swrl;
     Unbinder unbinder;
+    @BindView(R.id.tv_search)
+    TextView mTvSearch;
+    Unbinder unbinder1;
     private HotCallAdapter tagAdapter;
-    private int page;
+    private int            page;
     private boolean isLoadMore = true;
 
-    public List<HomeMovieBean.DataBean> dataList = new ArrayList<>();
-    private List<String> imagesList = new ArrayList<>();
+    public  List<HomeMovieBean.DataBean> dataList   = new ArrayList<>();
+    private List<String>                 imagesList = new ArrayList<>();
 
     @Override
     protected void initView() {
@@ -190,5 +199,19 @@ public class HomeFragment extends BaseFragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        unbinder1.unbind();
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // TODO: inflate a fragment view
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        unbinder1 = ButterKnife.bind(this, rootView);
+        return rootView;
+    }
+
+    @OnClick(R.id.tv_search)
+    public void onClick() {
+        startActivity(new Intent(getActivity(), SearchActivity.class));
     }
 }

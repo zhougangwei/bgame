@@ -157,8 +157,6 @@ public class VideoActivity extends BaseActivity {
                     return rawResourceDataSource;
                 }
             };
-
-
             videoSource = new ExtractorMediaSource(rawResourceDataSource.getUri(),
                     factory, extractorsFactory, null, null);
             curVideoSource = new LoopingMediaSource(videoSource);
