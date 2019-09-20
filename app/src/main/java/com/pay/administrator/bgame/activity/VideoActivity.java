@@ -3,6 +3,7 @@ package com.pay.administrator.bgame.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.PixelFormat;
+import android.net.Uri;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -23,15 +24,18 @@ import com.google.android.exoplayer2.trackselection.TrackSelector;
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout;
 import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
 import com.google.android.exoplayer2.upstream.BandwidthMeter;
-import com.google.android.exoplayer2.upstream.DataSource;
+
 import com.google.android.exoplayer2.upstream.DataSpec;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.RawResourceDataSource;
+
 import com.pay.administrator.bgame.R;
 import com.pay.administrator.bgame.base.BaseActivity;
 import com.pay.administrator.bgame.bean.BaseBean;
+import com.pay.administrator.bgame.bean.VideoBean;
 import com.pay.administrator.bgame.http.BaseCosumer;
 import com.pay.administrator.bgame.http.RetrofitFactory;
+import com.pay.administrator.bgame.utils.CacheDataSourceFactory;
 import com.pay.administrator.bgame.utils.ResultUtils;
 
 import butterknife.BindView;
@@ -44,17 +48,11 @@ public class VideoActivity extends BaseActivity {
 
     @BindView(R.id.player)
     SimpleExoPlayerView playerView;
-    private SimpleExoPlayer player;
-    private boolean playWhenReady;
-    private int currentWindow;
-    private long playbackPosition;
+
     private String vid;
     private SimpleExoPlayer exoPlayer;
     private ExtractorMediaSource videoSource;
     private LoopingMediaSource curVideoSource;
-
-
-
 
     public  static void startVideo(Context context,int vid){
         Intent intent = new Intent(context,VideoActivity.class);
@@ -67,20 +65,24 @@ public class VideoActivity extends BaseActivity {
         RetrofitFactory.getInstance().getVideoDetail(vid)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseCosumer<BaseBean>() {
+                .subscribe(new BaseCosumer<VideoBean>() {
                     @Override
-                    public void onGetData(BaseBean baseBean) {
+                    public void onGetData(VideoBean baseBean) {
                         if (ResultUtils.cheekSuccess(baseBean)) {
-                            getMediaSource();
+                            getMediaSource(baseBean.getData().getUrl());
                         }
                     }
                 });
     }
 
-    private void getMediaSource() {
-       // Uri uri = Uri.parse(getString(R.string.media_url_mp4));
-       // MediaSource mediaSource = buildMediaSource(uri);
-       // player.prepare(mediaSource, true,
+    private void getMediaSource(String url) {
+        DefaultExtractorsFactory extractorsFactory = new DefaultExtractorsFactory();
+        CacheDataSourceFactory cacheDataSourceFactory = new CacheDataSourceFactory(this, 200 * 1024 * 1024, 20 *
+                1024 * 1024);
+        videoSource = new ExtractorMediaSource(Uri.parse(url),
+                cacheDataSourceFactory, extractorsFactory, null, null);
+        curVideoSource = new LoopingMediaSource(videoSource);
+        exoPlayer.prepare(curVideoSource);
 
     }
 
@@ -132,7 +134,7 @@ public class VideoActivity extends BaseActivity {
 
 
     private void initExoplayer() {
-        try {
+
             /*用来接收  滑动到哪儿了 但是 然后延迟一秒再去拿数据
              * throttleLast 操作符
              * */
@@ -145,27 +147,10 @@ public class VideoActivity extends BaseActivity {
             exoPlayer = ExoPlayerFactory.newSimpleInstance(renderersFactory, trackSelector, loadControl);
             exoPlayer.setVolume(0);
             exoPlayer.setRepeatMode(Player.REPEAT_MODE_ALL);
-            DefaultExtractorsFactory extractorsFactory = new DefaultExtractorsFactory();
-            DataSpec dataSpec = new DataSpec(RawResourceDataSource.buildRawResourceUri(R.raw.loginvideo));
-            final RawResourceDataSource rawResourceDataSource = new RawResourceDataSource(this);
-            rawResourceDataSource.open(dataSpec);
 
-
-            DataSource.Factory factory = new DataSource.Factory() {
-                @Override
-                public DataSource createDataSource() {
-                    return rawResourceDataSource;
-                }
-            };
-            videoSource = new ExtractorMediaSource(rawResourceDataSource.getUri(),
-                    factory, extractorsFactory, null, null);
-            curVideoSource = new LoopingMediaSource(videoSource);
-            exoPlayer.prepare(curVideoSource);
 
             exoPlayer.setPlayWhenReady(true);
-        } catch (RawResourceDataSource.RawResourceDataSourceException e) {
-            e.printStackTrace();
-        }
+
     }
     private void initExo() {
 

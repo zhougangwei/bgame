@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.pay.administrator.bgame.R;
+import com.pay.administrator.bgame.adapter.SearchAdapter;
 import com.pay.administrator.bgame.base.BaseActivity;
 
 import butterknife.BindView;
@@ -26,6 +27,9 @@ public class SearchActivity extends BaseActivity {
     TextView     mTvCancel;
     @BindView(R.id.rv)
     RecyclerView mRv;
+
+    SearchAdapter
+
 
     @Override
     protected void initData() {
@@ -49,16 +53,8 @@ public class SearchActivity extends BaseActivity {
                     if (TextUtils.isEmpty(search)) {
                         return false;
                     }
-                    SearchRecord record = new SearchRecord();
-                    record.setName(search);
-                    record.setType(SearchRecordManager.RecordType.SearchUser);
-                    searchRecords.clear();
-                    searchRecords.addAll(SearchRecordManager.getInstance().insertOrReplace(record));
-                    showSearchRecord();
                     mHistoryAdapter.notifyDataSetChanged();
-
                     startSearch();
-
                 }
                 return false;
             }

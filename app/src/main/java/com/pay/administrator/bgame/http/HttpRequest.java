@@ -5,6 +5,7 @@ import com.pay.administrator.bgame.bean.BaseBean;
 import com.pay.administrator.bgame.bean.HomeMovieBean;
 import com.pay.administrator.bgame.bean.LoginBean;
 import com.pay.administrator.bgame.bean.TagBean;
+import com.pay.administrator.bgame.bean.VideoBean;
 
 import io.reactivex.Observable;
 import okhttp3.RequestBody;
@@ -25,7 +26,7 @@ public interface HttpRequest {
     );
 
     @GET("/namol/api/app/v1/movie/{vid}")
-    Observable<BaseBean> getVideoDetail(@Path("vid")String vid);
+    Observable<VideoBean> getVideoDetail(@Path("vid")String vid);
 
 
     @GET("/namol/api/app/v1/search")
