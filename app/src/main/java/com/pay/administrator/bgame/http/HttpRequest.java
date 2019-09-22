@@ -45,7 +45,12 @@ public interface HttpRequest {
     @GET("/namol/api/app/v1/login")
     Observable<BaseBean> loginPhone();
 
-    @GET("/namol/api/app/v1/sendMsgCode?telephone")
-    Observable<BaseBean> sendMsgCode();
+    @POST("/namol/api/app/v1/sendMsgCode")
+    Observable<BaseBean> sendMsgCode(@Query("telephone") String telephone);
 
+    @POST("/namol/api/app/v1/userRegister")
+    Observable<BaseBean> userRegister(@Body RequestBody requestBody);
+
+    RequestBody userRegister(@JsonQuery String dataJson
+    );
 }

@@ -28,8 +28,6 @@ public class SearchActivity extends BaseActivity {
     @BindView(R.id.rv)
     RecyclerView mRv;
 
-    SearchAdapter
-
 
     @Override
     protected void initData() {
@@ -53,8 +51,8 @@ public class SearchActivity extends BaseActivity {
                     if (TextUtils.isEmpty(search)) {
                         return false;
                     }
-                    mHistoryAdapter.notifyDataSetChanged();
-                    startSearch();
+                    //mHistoryAdapter.notifyDataSetChanged();
+                 startSearch();
                 }
                 return false;
             }
@@ -78,4 +76,9 @@ public class SearchActivity extends BaseActivity {
     @OnClick(R.id.tv_cancel)
     public void onClick() {
     }
+
+    public void startSearch(){
+
+    }
+
 }

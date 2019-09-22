@@ -13,9 +13,6 @@ import android.widget.TextView;
 
 import com.pay.administrator.bgame.R;
 import com.pay.administrator.bgame.base.BaseActivity;
-import com.pay.administrator.bgame.bean.BaseBean;
-import com.pay.administrator.bgame.http.BaseCosumer;
-import com.pay.administrator.bgame.http.RetrofitFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,10 +23,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnTextChanged;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 
-public class EnterSmsActivity extends BaseActivity {
+public class EnterInviActivity extends BaseActivity {
     @BindView(R.id.iv_back)
     ImageView    mIvBack;
     @BindView(R.id.tv_title)
@@ -55,38 +50,21 @@ public class EnterSmsActivity extends BaseActivity {
     EditText etCode5;
     @BindView(R.id.et_code_6)
     EditText etCode6;
-    @BindView(R.id.tv_register_code_next)
-    TextView tvRegisterCodeNext;
-    private int currentPosition = 1;
+
     private String country;
     private String country_code;
     private String telephone;
     private String msg_code;
-
-
+    private int currentPosition = 1;
 
     @Override
     protected void initData() {
 
-        getData();
-    }
-
-    private void getData() {
-        RetrofitFactory.getInstance().sendMsgCode(telephone)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseCosumer<BaseBean>() {
-                    @Override
-                    public void onGetData(BaseBean tagbean) {
-
-
-                    }
-                });
     }
 
     @Override
     protected int getContentViewId() {
-        return R.layout.activity_enter_sms;
+        return R.layout.activity_enter_invi;
     }
 
     @Override
@@ -96,6 +74,7 @@ public class EnterSmsActivity extends BaseActivity {
         country= intent.getStringExtra("country");
         country_code= intent.getStringExtra("country_code");
         telephone= intent.getStringExtra("telephone");
+        msg_code= intent.getStringExtra("msg_code");
 
         editTextList = new ArrayList<>();
         editTextList.add(etCode1);
@@ -163,11 +142,11 @@ public class EnterSmsActivity extends BaseActivity {
     @OnTextChanged(value = R.id.et_code_6, callback = OnTextChanged.Callback.TEXT_CHANGED)
     public void onTextChanged6(CharSequence s, int start, int before, int count) {
         if (before == 1 && start == 0) {
-            tvRegisterCodeNext.setSelected(false);
-            tvRegisterCodeNext.setEnabled(false);
+            mTvSubmit.setSelected(false);
+            mTvSubmit.setEnabled(false);
         } else if (before == 0 && start == 0) {
-            tvRegisterCodeNext.setSelected(true);
-            tvRegisterCodeNext.setEnabled(true);
+            mTvSubmit.setSelected(true);
+            mTvSubmit.setEnabled(true);
         }
         requestFocus();
     }
@@ -190,29 +169,34 @@ public class EnterSmsActivity extends BaseActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.iv_back,  R.id.tv_submit, R.id.tv_send_again})
+    @OnClick({R.id.iv_back, R.id.tv_submit, R.id.tv_skip, R.id.tv_send_again})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
                 finish();
                 break;
             case R.id.tv_submit:
-               startInvi();
+                gotoNext();
                 break;
             case R.id.tv_send_again:
-                getData();
+                break;
+            case R.id.tv_skip:
                 break;
         }
     }
 
-
-    private void startInvi() {
-        msg_code  = etCode1.getText().toString() + etCode2.getText().toString() + etCode3.getText().toString() +
+    private void gotoNext() {
+        String inviCode = etCode1.getText().toString() + etCode2.getText().toString() + etCode3.getText().toString() +
                 etCode4.getText().toString() + etCode5.getText().toString() + etCode6.getText().toString();
+        gotoSetPsw(inviCode);
+    }
+
+    private void gotoSetPsw(String inviCode) {
         Intent intent = new Intent(this, SetPasswordActivity.class);
         intent.putExtra("country", country);
         intent.putExtra("country_code", country_code);
         intent.putExtra("telephone", telephone);
+        intent.putExtra("recommender_id", inviCode);
         intent.putExtra("msg_code", msg_code);
         startActivity(intent);
     }

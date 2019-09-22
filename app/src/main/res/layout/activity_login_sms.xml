@@ -8,13 +8,13 @@
     android:background="#111111"
 
     tools:context="com.pay.administrator.bgame.activity.LoginActivity">
+
     <include
-        android:text="@string/please_enter_mobile_number"
         android:id="@+id/include2"
-        layout="@layout/include_top_toolbar"/>
+        layout="@layout/include_top_toolbar"
+        android:text="@string/please_enter_mobile_number"/>
 
     <TextView
-        android:gravity="center_vertical"
         android:id="@+id/tv_choose_country"
         android:layout_width="0dp"
         android:layout_height="48dp"
@@ -23,10 +23,11 @@
         android:layout_marginTop="40dp"
         android:background="@drawable/bg_login_input"
         android:ems="10"
-        android:text="Select country / region"
+        android:gravity="center_vertical"
         android:inputType="phone"
         android:paddingEnd="21dp"
         android:paddingStart="21dp"
+        android:text="Select country / region"
         android:textColor="@color/white"
         android:textColorHint="#FF666666"
         android:textSize="16sp"
@@ -36,12 +37,13 @@
 
 
     <EditText
-        android:id="@+id/et_pwd"
+        android:id="@+id/et_phonenum"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/bg_login_input"
         android:ems="10"
+        android:gravity="center"
         android:hint="Please enter mobile number"
         android:inputType="phone"
         android:paddingEnd="21dp"
@@ -65,26 +67,22 @@
         android:text="@string/send_the_verification_code"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_pwd"/>
+        app:layout_constraintTop_toBottomOf="@+id/et_phonenum"/>
 
     <TextView
         android:id="@+id/tv_forget"
         android:layout_width="238dp"
-        android:gravity="center_horizontal"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="28dp"
+        android:gravity="center_horizontal"
         android:text="@string/click_the_button_above_and_your_phone_will_receive_a_text_message_from_namol"
         android:textColor="#FF888888"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/include3"/>
-
-    <include
-        android:textColor="#FF888888"
-        layout="@layout/include_terms_of_use"/>
 
 
 </android.support.constraint.ConstraintLayout>

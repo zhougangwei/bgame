@@ -41,6 +41,8 @@
         <activity android:name=".activity.SearchActivity"/>
         <activity android:name=".activity.VipActivity">
         </activity>
+        <activity android:name=".activity.EnterInviActivity"/>
+        <activity android:name=".activity.ChooseCountryActivity"/>
     </application>
 
 </manifest>

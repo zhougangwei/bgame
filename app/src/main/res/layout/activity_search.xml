@@ -14,6 +14,7 @@
     </ImageView>
 
     <EditText
+        android:maxLines="1"
         android:imeOptions="actionSearch"
         android:id="@+id/et_search"
         android:layout_width="0dp"
@@ -43,9 +44,9 @@
         android:text="Cancel"
         android:textColor="@color/black"
         android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_search"
+        app:layout_constraintBottom_toBottomOf="@+id/et_search"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv_search"/>
+        app:layout_constraintTop_toTopOf="@+id/et_search"/>
 
 
     <android.support.v7.widget.RecyclerView

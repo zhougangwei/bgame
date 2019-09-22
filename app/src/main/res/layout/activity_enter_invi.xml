@@ -17,12 +17,13 @@
         android:id="@+id/tv1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginEnd="80dp"
+
+        android:layout_marginStart="80dp"
         android:layout_marginTop="40dp"
         android:gravity="center"
-        android:text="Please fill in the 6-digit verification code
-sent to +8613558812356"
+        android:text="Please enter the 6-digit invitation code
+        sent to you by your friend."
         android:textColor="#888888"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -215,19 +216,37 @@ sent to +8613558812356"
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/tv_skip"
+        android:layout_width="150dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="58dp"
+        android:background="@drawable/bg_skip"
+        android:gravity="center"
+        android:text="skip"
+        android:textColor="#FFFFC937"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll_register_code"
+        app:layout_goneMarginBottom="50dp"
+        tools:showIn="@layout/activity_account_management"/>
 
-    <include
-        android:id="@+id/tv_register_code_next"
-        layout="@layout/include_submit"
-        android:layout_width="0dp"
+    <TextView
+        android:id="@+id/tv_submit"
+        android:layout_width="150dp"
         android:layout_height="44dp"
         android:layout_marginEnd="27dp"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="60dp"
-        android:text="@string/next"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/bg_submit"
+        android:gravity="center"
+        android:text="Next"
+        android:textColor="@color/black"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ll_register_code"/>
+        app:layout_constraintTop_toTopOf="@+id/tv_skip"
+        app:layout_goneMarginBottom="50dp"
+        tools:showIn="@layout/activity_account_management"/>
 
     <TextView
         android:id="@+id/tv_send_again"
@@ -235,15 +254,15 @@ sent to +8613558812356"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="24dp"
         android:gravity="center_horizontal"
-        android:text="If you are not invited by a friend,
-please click the skip button"
+        android:text="Didn't receive the text message?
+Please click resend after 55s"
         android:textColor="#FF888888"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_register_code_next"/>
+        app:layout_constraintTop_toBottomOf="@+id/tv_submit"/>
 
 
 </android.support.constraint.ConstraintLayout>
