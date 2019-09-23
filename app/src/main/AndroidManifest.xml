@@ -43,6 +43,7 @@
         </activity>
         <activity android:name=".activity.EnterInviActivity"/>
         <activity android:name=".activity.ChooseCountryActivity"/>
+        <activity android:name=".activity.NoticeListActivity" />
     </application>
 
 </manifest>

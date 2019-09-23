@@ -64,7 +64,7 @@ public class ChooseCountryActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-
+        mTvTitle.setText("Select country / region");
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rvCountry.setLayoutManager(layoutManager);

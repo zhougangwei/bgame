@@ -78,8 +78,6 @@ public class EnterSmsActivity extends BaseActivity {
                 .subscribe(new BaseCosumer<BaseBean>() {
                     @Override
                     public void onGetData(BaseBean tagbean) {
-
-
                     }
                 });
     }

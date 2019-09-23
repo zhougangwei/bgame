@@ -1,23 +1,16 @@
 package com.pay.administrator.bgame.activity;
 
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.blankj.utilcode.utils.LogUtils;
-import com.blankj.utilcode.utils.SizeUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.pay.administrator.bgame.R;
 import com.pay.administrator.bgame.adapter.LikeAdapter;
-import com.pay.administrator.bgame.adapter.SearchAdapter;
 import com.pay.administrator.bgame.base.BaseActivity;
-import com.pay.administrator.bgame.base.Contact;
-import com.pay.administrator.bgame.bean.BaseBean;
-import com.pay.administrator.bgame.bean.HomeMovieBean;
 import com.pay.administrator.bgame.bean.TagBean;
 import com.pay.administrator.bgame.http.BaseCosumer;
 import com.pay.administrator.bgame.http.RetrofitFactory;
@@ -31,7 +24,7 @@ import butterknife.OnClick;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
-public class MylikeActivity extends BaseActivity {
+public class NoticeListActivity extends BaseActivity {
 
 
     @BindView(R.id.iv_back)
@@ -68,7 +61,7 @@ public class MylikeActivity extends BaseActivity {
         } else {
             page++;
         }
-        RetrofitFactory.getInstance().getMyLikeList(1)
+        RetrofitFactory.getInstance().getNoticeList(1,1)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new BaseCosumer<TagBean>() {
@@ -98,7 +91,7 @@ public class MylikeActivity extends BaseActivity {
 
     @Override
     protected int getContentViewId() {
-        return R.layout.activity_mylike;
+        return R.layout.activity_noticelist;
     }
 
     @Override
@@ -133,12 +126,10 @@ public class MylikeActivity extends BaseActivity {
         }, rv);
 
         likeAdapter.setPreLoadNumber(5);
-        likeAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+        likeAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
-            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                TagBean.DataBean dataBean = datas.get(position);
-                dataBean.setSelectEdit(!dataBean.isSelectEdit());
-                adapter.notifyDataSetChanged();
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+
             }
         });
 

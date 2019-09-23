@@ -4,9 +4,11 @@ package com.pay.administrator.bgame.http;
 import com.pay.administrator.bgame.bean.BaseBean;
 import com.pay.administrator.bgame.bean.HomeMovieBean;
 import com.pay.administrator.bgame.bean.LoginBean;
+import com.pay.administrator.bgame.bean.NoticeBean;
 import com.pay.administrator.bgame.bean.TagBean;
 import com.pay.administrator.bgame.bean.VideoBean;
 
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 import okhttp3.RequestBody;
 import retrofit2.http.Body;
@@ -53,4 +55,13 @@ public interface HttpRequest {
 
     RequestBody userRegister(@JsonQuery String dataJson
     );
+
+    @GET("/namol/api/app/v1/collect")
+    Observable<TagBean> getMyLikeList(@Query("user_id")int userid);
+
+    @GET("/namol/api/app/v1/noticeList")
+    Observable<TagBean> getNoticeList(@Query("user_id")int userid,@Query("pageNum")int pageNum);
+
+    @GET("/namol/api/app/v1/feedBackList")
+    Observable<TagBean> getFeedbackList(@Query("user_id")int userid,@Query("pageNum")int pageNum);
 }

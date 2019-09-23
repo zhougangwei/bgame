@@ -13,7 +13,7 @@ public class FeedbackFragment extends BaseFragment {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragmeng_home;
+        return R.layout.fragmeng_feedback;
     }
 
     @Override
