@@ -91,12 +91,12 @@
         android:text="You can watch today"
         android:textColor="#FFFFC937"
         android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@id/textView4"
-        app:layout_constraintBottom_toBottomOf="@+id/textView4"
+        app:layout_constraintEnd_toStartOf="@id/tv_count"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_count"
         app:layout_constraintStart_toStartOf="@+id/imageView2"/>
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/tv_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -119,9 +119,9 @@
         android:text="times"
         android:textColor="#FFFFC937"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView4"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_count"
         app:layout_constraintEnd_toEndOf="@+id/imageView2"
-        app:layout_constraintStart_toEndOf="@+id/textView4" />
+        app:layout_constraintStart_toEndOf="@+id/tv_count" />
 
     <TextView
         android:id="@+id/textView6"

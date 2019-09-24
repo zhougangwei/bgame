@@ -1,6 +1,7 @@
 package com.pay.administrator.bgame.base;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.support.multidex.MultiDex;
@@ -9,6 +10,7 @@ import android.util.DisplayMetrics;
 
 import com.blankj.utilcode.utils.LogUtils;
 import com.facebook.FacebookSdk;
+import com.pay.administrator.bgame.activity.LoginActivity;
 import com.pay.administrator.bgame.utils.SPUtil;
 import com.pay.administrator.bgame.utils.ToolUtils;
 
@@ -91,7 +93,12 @@ public class App extends MultiDexApplication {
         return application;
     }
 
+    public static void goLogin() {
+        Intent intent = new Intent(application, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        application.startActivity(intent);
 
+    }
     @Override
     public void onTerminate() {
         super.onTerminate();

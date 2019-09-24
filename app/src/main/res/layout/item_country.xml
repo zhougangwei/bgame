@@ -2,18 +2,20 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="15dp"
-    android:paddingStart="12dp"
-    android:paddingEnd="12dp">
+    android:background="#FF252525"
+    android:paddingStart="25dp"
+    android:paddingEnd="23dp">
 
     <TextView
+        android:paddingTop="18dp"
+        android:paddingBottom="18dp"
         android:id="@+id/tv_country_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:includeFontPadding="false"
-        android:textColor="#5a5a59"
-        android:textSize="15sp" />
+        android:textColor="#FFFFFFFF"
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/tv_country_code"
@@ -21,15 +23,13 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
-        android:layout_marginEnd="10dp"
         android:includeFontPadding="false"
-        android:textColor="#6089b6"
-        android:textSize="16sp" />
+        android:textColor="#FF888888"
+        android:textSize="14sp" />
 
     <View
-        android:layout_marginTop="15dp"
         android:layout_below="@+id/tv_country_name"
         android:layout_width="match_parent"
-        android:background="@color/linecolor"
+        android:background="#FF1C1C1C"
         android:layout_height="1dp"/>
 </RelativeLayout>

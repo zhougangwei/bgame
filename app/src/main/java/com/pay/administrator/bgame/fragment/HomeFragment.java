@@ -155,19 +155,20 @@ public class HomeFragment extends BaseFragment {
                         super.onError(e);
                         tagAdapter.loadMoreFail();
                     }
-
                     @Override
                     public void onGetData(HomeMovieBean homeMovieBean) {
                         if (!ResultUtils.cheekSuccess(homeMovieBean)) {
                             tagAdapter.loadMoreFail();
                             return;
                         }
-                        if (homeMovieBean.getData() == null || homeMovieBean.getData().size() == 0) {
+                        /*if (homeMovieBean.getData() == null || homeMovieBean.getData().size() == 0) {
                             tagAdapter.loadMoreEnd();
                             isLoadMore = false;
                         } else {
                             tagAdapter.loadMoreComplete();
-                        }
+                        }*/
+                        tagAdapter.loadMoreEnd();
+                        isLoadMore = false;
                         if (isRefresh) {
                             dataList.clear();
                         }
@@ -196,19 +197,8 @@ public class HomeFragment extends BaseFragment {
     }
 
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder1.unbind();
-    }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        unbinder1 = ButterKnife.bind(this, rootView);
-        return rootView;
-    }
+
 
     @OnClick(R.id.tv_search)
     public void onClick() {

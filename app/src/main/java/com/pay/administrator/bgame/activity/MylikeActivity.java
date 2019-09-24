@@ -12,14 +12,20 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.pay.administrator.bgame.R;
 import com.pay.administrator.bgame.adapter.LikeAdapter;
 import com.pay.administrator.bgame.base.BaseActivity;
+import com.pay.administrator.bgame.bean.BaseBean;
 import com.pay.administrator.bgame.bean.HomeMovieBean;
 import com.pay.administrator.bgame.bean.TagBean;
+import com.pay.administrator.bgame.http.BaseCosumer;
+import com.pay.administrator.bgame.http.RetrofitFactory;
+import com.pay.administrator.bgame.utils.ResultUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 public class MylikeActivity extends BaseActivity {
 
@@ -38,6 +44,23 @@ public class MylikeActivity extends BaseActivity {
 
     @Override
     protected void initData() {
+        RetrofitFactory.getInstance().getLikeVideo()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new BaseCosumer<TagBean>() {
+                    @Override
+                    public void onGetData(TagBean baseBean) {
+                        if (ResultUtils.cheekSuccess(baseBean)) {
+                            if (baseBean.getData()!=null) {
+                                datas.clear();
+                                datas.addAll(baseBean.getData());
+                            }
+                            likeAdapter.notifyDataSetChanged();
+                        }
+                    }
+                });
+
+
     }
 
     @Override

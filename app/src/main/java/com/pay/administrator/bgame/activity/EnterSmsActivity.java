@@ -15,7 +15,9 @@ import com.pay.administrator.bgame.R;
 import com.pay.administrator.bgame.base.BaseActivity;
 import com.pay.administrator.bgame.bean.BaseBean;
 import com.pay.administrator.bgame.http.BaseCosumer;
+import com.pay.administrator.bgame.http.ProxyPostHttpRequest;
 import com.pay.administrator.bgame.http.RetrofitFactory;
+import com.pay.administrator.bgame.utils.ResultUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,8 +40,7 @@ public class EnterSmsActivity extends BaseActivity {
     TextView     mTv1;
     @BindView(R.id.ll_register_code)
     LinearLayout mLlRegisterCode;
-    @BindView(R.id.tv_submit)
-    TextView     mTvSubmit;
+
     @BindView(R.id.tv_send_again)
     TextView     mTvsendAgain;
     private List<EditText> editTextList;
@@ -79,7 +80,6 @@ public class EnterSmsActivity extends BaseActivity {
                     @Override
                     public void onGetData(BaseBean tagbean) {
 
-
                     }
                 });
     }
@@ -91,7 +91,9 @@ public class EnterSmsActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-
+        mTvTitle.setTextSize(15);
+        tvRegisterCodeNext.setText("Next");
+        mTvTitle.setText("6-digit verification code has been sent");
         Intent intent = getIntent();
         country= intent.getStringExtra("country");
         country_code= intent.getStringExtra("country_code");
@@ -189,14 +191,13 @@ public class EnterSmsActivity extends BaseActivity {
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
     }
-
-    @OnClick({R.id.iv_back,  R.id.tv_submit, R.id.tv_send_again})
+    @OnClick({R.id.iv_back,  R.id.tv_register_code_next, R.id.tv_send_again})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
                 finish();
                 break;
-            case R.id.tv_submit:
+            case R.id.tv_register_code_next:
                startInvi();
                 break;
             case R.id.tv_send_again:
@@ -204,16 +205,24 @@ public class EnterSmsActivity extends BaseActivity {
                 break;
         }
     }
-
-
     private void startInvi() {
         msg_code  = etCode1.getText().toString() + etCode2.getText().toString() + etCode3.getText().toString() +
                 etCode4.getText().toString() + etCode5.getText().toString() + etCode6.getText().toString();
-        Intent intent = new Intent(this, SetPasswordActivity.class);
-        intent.putExtra("country", country);
-        intent.putExtra("country_code", country_code);
-        intent.putExtra("telephone", telephone);
-        intent.putExtra("msg_code", msg_code);
-        startActivity(intent);
+        RetrofitFactory.getInstance().verSmsCode(ProxyPostHttpRequest.getJsonInstance().verSmsCode(telephone,msg_code))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new BaseCosumer<BaseBean>() {
+                    @Override
+                    public void onGetData(BaseBean baseBean) {
+                        if (ResultUtils.cheekSuccess(baseBean)) {
+                            Intent intent = new Intent(EnterSmsActivity.this, SetPasswordActivity.class);
+                            intent.putExtra("country", country);
+                            intent.putExtra("country_code", country_code);
+                            intent.putExtra("telephone", telephone);
+                            intent.putExtra("msg_code", msg_code);
+                            startActivity(intent);
+                        }
+                    }
+                });
     }
 }

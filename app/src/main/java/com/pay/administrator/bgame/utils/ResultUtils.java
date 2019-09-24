@@ -21,10 +21,5 @@ public class ResultUtils {
     }
 
 
-    public static boolean isNoMoney(BaseBean bean) {
-        if (Contact.REPONSE_CODE_CALL_NO_MONEY==bean.code) {
-            return true;
-        }
-        return false;
-    }
+
 }

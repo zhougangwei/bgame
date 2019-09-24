@@ -6,10 +6,17 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.pay.administrator.bgame.R;
 import com.pay.administrator.bgame.base.BaseActivity;
+import com.pay.administrator.bgame.bean.LoginBean;
+import com.pay.administrator.bgame.http.BaseCosumer;
+import com.pay.administrator.bgame.http.ProxyPostHttpRequest;
 import com.pay.administrator.bgame.http.RetrofitFactory;
+import com.pay.administrator.bgame.utils.ResultUtils;
+import com.pay.administrator.bgame.utils.SPUtil;
+import com.pay.administrator.bgame.utils.ToastUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,6 +41,9 @@ public class LoginMobileActivity extends BaseActivity {
     @BindView(R.id.tv_rule)
     TextView tvRule;
 
+    @BindView(R.id.tv_edit)
+    TextView tvEdit;
+
     @Override
     protected void initData() {
 
@@ -46,11 +56,13 @@ public class LoginMobileActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-
+        tvSubmit.setText("Login");
+        tvTitle.setText("Login");
+        tvEdit.setText("register");
     }
 
 
-    @OnClick({R.id.iv_back, R.id.tv_submit})
+    @OnClick({R.id.iv_back, R.id.tv_submit,R.id.tv_edit})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
@@ -58,40 +70,30 @@ public class LoginMobileActivity extends BaseActivity {
                 break;
             case R.id.tv_submit:
                 gotoSubmit();
-
+                break;
+            case R.id.tv_edit:
+                startActivity(new Intent(this,LoginSmsActivity.class));
                 break;
         }
     }
 
     private void gotoSubmit() {
-
         final String psw = etPwd.getText().toString();
-        final String mobileNumber = "+86"+etMobileNum.getText().toString();
+        final String mobileNumber = etMobileNum.getText().toString();
         RetrofitFactory.getInstance()
-                .loginPhone()
+                .loginPhone(ProxyPostHttpRequest.getInstance().loginPhone(mobileNumber,psw))
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
-               /* .subscribe(new BaseCosumer<LoginBean>() {
+                .observeOn(AndroidSchedulers.mainThread())
+               .subscribe(new BaseCosumer<LoginBean>() {
                     @Override
                     public void onGetData(LoginBean baseBean) {
-                        if (Contact.REPONSE_CODE_SUCCESS != baseBean.getCode()) {
+                        if (!ResultUtils.cheekSuccess(baseBean)) {
                             return;
                         }
-                        String action = baseBean.getData().getAction();
-                        if (Contact.SIGN_UP.equals(action)) {
-                            Intent intent = new Intent(LoginPhoneActivity.this, FillUserActivity.class);
-                            intent.putExtra("mobileNumber", mobileNumber);
-                            intent.putExtra("code", code);
-                            intent.putExtra("type", FillUserActivity.FROM_PHONE);
-                            startActivityForResult(intent,REQUEST_PHONE);
-                        } else if (Contact.SIGN_IN.equals(action)) {
-                            AvchatInfo.saveBaseData(baseBean.getData().getMember(),LoginPhoneActivity.this,true);
-                            Intent intent = new Intent(LoginPhoneActivity.this,MainActivity.class);
-                            startActivity(intent);
-                            setResult(RESULT_OK);
-                            finish();
-                        }
+                        SPUtil.getInstance().setToken(baseBean.getData());
+                        ToastUtils.showToast(LoginMobileActivity.this,"success!");
+                        startActivity(new Intent(LoginMobileActivity.this,MainActivity.class));
                     }
-                });*/
+                });
     }
 }

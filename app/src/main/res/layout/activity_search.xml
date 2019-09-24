@@ -26,6 +26,7 @@
         android:drawablePadding="8dp"
         android:drawableStart="@drawable/icon_input_search"
         android:gravity="center_vertical"
+        android:singleLine="true"
         android:hint="Please enter a keyword to find the source"
         android:paddingStart="6dp"
         android:textColorHint="#FFC937"

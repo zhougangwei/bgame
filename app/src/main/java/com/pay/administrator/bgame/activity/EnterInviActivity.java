@@ -69,7 +69,8 @@ public class EnterInviActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-
+        mTvTitle.setText("Enter invitation code");
+        mTvTitle.setTextSize(15);
         Intent intent = getIntent();
         country= intent.getStringExtra("country");
         country_code= intent.getStringExtra("country_code");

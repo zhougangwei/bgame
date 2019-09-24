@@ -25,12 +25,13 @@
         <activity android:name=".activity.MainActivity">
         </activity>
         <activity android:name=".activity.MylikeActivity"/>
-        <activity android:name=".activity.LoginActivity"/>
+        <activity android:name=".activity.LoginActivity"
+            android:launchMode="singleTask"
+            />
         <activity android:name=".activity.LoginMobileActivity"/>
         <activity android:name=".activity.SpalshActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
@@ -43,6 +44,8 @@
         </activity>
         <activity android:name=".activity.EnterInviActivity"/>
         <activity android:name=".activity.ChooseCountryActivity"/>
+        <activity android:name=".activity.LoginSmsActivity"/>
+        <activity android:name=".activity.NoticeListActivity"/>
     </application>
 
 </manifest>

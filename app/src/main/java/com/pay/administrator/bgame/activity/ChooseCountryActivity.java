@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -30,8 +31,8 @@ public class ChooseCountryActivity extends BaseActivity {
 
 
 
-    @BindView(R.id.tv_cancel)
-    TextView     mTvCancel;
+    @BindView(R.id.iv_back)
+    ImageView    mIvback;
     @BindView(R.id.tv_title)
     TextView     mTvTitle;
     @BindView(R.id.rv_country)
@@ -64,7 +65,7 @@ public class ChooseCountryActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-
+        mTvTitle.setText("Select country / region");
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rvCountry.setLayoutManager(layoutManager);
@@ -85,10 +86,10 @@ public class ChooseCountryActivity extends BaseActivity {
 
 
 
-    @OnClick({R.id.tv_cancel})
+    @OnClick({R.id.iv_back})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.tv_cancel:
+            case R.id.iv_back:
                 finish();
                 break;
 
