@@ -1,6 +1,5 @@
 package com.pay.administrator.bgame.activity;
 
-import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -8,10 +7,15 @@ import android.widget.TextView;
 
 import com.pay.administrator.bgame.R;
 import com.pay.administrator.bgame.base.BaseActivity;
+import com.pay.administrator.bgame.bean.UserInfo;
+import com.pay.administrator.bgame.http.BaseCosumer;
+import com.pay.administrator.bgame.http.RetrofitFactory;
+import com.pay.administrator.bgame.utils.ResultUtils;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 public class AccountManagementActivity extends BaseActivity {
 
@@ -47,10 +51,11 @@ public class AccountManagementActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        getUserInfo();
+
+
 
     }
-
-
 
     @OnClick({R.id.iv_back, R.id.ll_account_management, R.id.ll_nick_name, R.id.ll_mobile, R.id.ll_change_psw})
     public void onViewClicked(View view) {
@@ -67,5 +72,22 @@ public class AccountManagementActivity extends BaseActivity {
             case R.id.ll_change_psw:
                 break;
         }
+    }
+
+    public void getUserInfo() {
+        RetrofitFactory.getInstance().getuserInfo(22)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new BaseCosumer<UserInfo>() {
+                    @Override
+                    public void onGetData(UserInfo baseBean) {
+                        if (ResultUtils.cheekSuccess(baseBean)) {
+                            UserInfo.DataBean data = baseBean.getData();
+                            String name = data.getName();
+
+                            tvAvatar.setText(name);
+                        }
+                    }
+                });
     }
 }

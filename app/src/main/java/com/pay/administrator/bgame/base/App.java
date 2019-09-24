@@ -11,6 +11,7 @@ import android.util.DisplayMetrics;
 import com.blankj.utilcode.utils.LogUtils;
 import com.facebook.FacebookSdk;
 import com.pay.administrator.bgame.activity.LoginActivity;
+import com.pay.administrator.bgame.utils.ActivityManagerUtil;
 import com.pay.administrator.bgame.utils.SPUtil;
 import com.pay.administrator.bgame.utils.ToolUtils;
 
@@ -94,6 +95,7 @@ public class App extends MultiDexApplication {
     }
 
     public static void goLogin() {
+        ActivityManagerUtil.getActivityManager().popAllActivityFromStack();
         Intent intent = new Intent(application, LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         application.startActivity(intent);

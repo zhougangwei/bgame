@@ -54,9 +54,7 @@ public class TagBean extends BaseBean implements MultiItemEntity {
         @SerializedName("playCount")
         private int playCount;
 
-        //编辑用
-        private boolean edit;
-        private boolean selectEdit;
+
 
         public int getId() {
             return id;
@@ -114,20 +112,6 @@ public class TagBean extends BaseBean implements MultiItemEntity {
             this.playCount = playCount;
         }
 
-        public void setEdit(boolean edit) {
-            this.edit = edit;
-        }
 
-        public boolean getEdit() {
-            return edit;
-        }
-
-        public boolean isSelectEdit() {
-            return selectEdit;
-        }
-
-        public void setSelectEdit(boolean selectEdit) {
-            this.selectEdit = selectEdit;
-        }
     }
 }

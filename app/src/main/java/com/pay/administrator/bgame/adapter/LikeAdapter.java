@@ -11,6 +11,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.pay.administrator.bgame.R;
 import com.pay.administrator.bgame.base.Contact;
 import com.pay.administrator.bgame.bean.HomeMovieBean;
+import com.pay.administrator.bgame.bean.LikeBean;
 import com.pay.administrator.bgame.bean.TagBean;
 import com.pay.administrator.bgame.utils.ToolUtils;
 
@@ -21,15 +22,15 @@ import java.util.List;
  * Created by kiddo on 2018/1/9.
  */
 
-public class LikeAdapter extends BaseQuickAdapter<TagBean.DataBean, BaseViewHolder> {
+public class LikeAdapter extends BaseQuickAdapter<LikeBean.DataBean, BaseViewHolder> {
 
 
-    public LikeAdapter(int layoutIds, List<TagBean.DataBean> datas) {
+    public LikeAdapter(int layoutIds, List<LikeBean.DataBean> datas) {
         super(layoutIds, datas);
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, TagBean.DataBean item) {
+    protected void convert(BaseViewHolder helper, LikeBean.DataBean item) {
         String content="";
         switch (ToolUtils.getLanguage()) {
             case Contact.LANGUAGE_CHINA:

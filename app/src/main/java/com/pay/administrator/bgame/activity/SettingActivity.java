@@ -1,5 +1,6 @@
 package com.pay.administrator.bgame.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -45,8 +46,6 @@ public class SettingActivity extends BaseActivity {
 
     }
 
-
-
     @OnClick({R.id.iv_back, R.id.ll_account_management, R.id.ll_clear_cache, R.id.ll_version, R.id.ll_user_agreement})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -54,6 +53,7 @@ public class SettingActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.ll_account_management:
+                startActivity(new Intent(this,AccountManagementActivity.class));
                 break;
             case R.id.ll_clear_cache:
                 break;

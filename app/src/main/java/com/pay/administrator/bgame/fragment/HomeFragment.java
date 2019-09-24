@@ -46,10 +46,9 @@ public class HomeFragment extends BaseFragment {
 
     @BindView(R.id.swrl)
     SwipeRefreshLayout swrl;
-    Unbinder unbinder;
     @BindView(R.id.tv_search)
     TextView mTvSearch;
-    Unbinder unbinder1;
+
     private HotCallAdapter tagAdapter;
     private int            page;
     private boolean isLoadMore = true;

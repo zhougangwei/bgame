@@ -3,6 +3,7 @@ package com.pay.administrator.bgame.http;
 
 import com.pay.administrator.bgame.bean.BaseBean;
 import com.pay.administrator.bgame.bean.HomeMovieBean;
+import com.pay.administrator.bgame.bean.LikeBean;
 import com.pay.administrator.bgame.bean.LoginBean;
 import com.pay.administrator.bgame.bean.TagBean;
 import com.pay.administrator.bgame.bean.UserInfo;
@@ -68,11 +69,11 @@ public interface HttpRequest {
     Observable<BaseBean> appInstall();
 
     @GET("/namol/api/app/v1/userInfo")
-    Observable<UserInfo> getuserInfo();
+    Observable<UserInfo> getuserInfo(@Query("user_id")int userid);
 
     @GET("/namol/api/app/v1/noticeList")
     Observable<TagBean> getNoticeList(@Query("pageNum") int page,@Query("user_id")int user_id);
 
     @GET("/namol/api/app/v1/collect")
-    Observable<TagBean> getLikeVideo();
+    Observable<LikeBean> getLikeVideo(@Query("user_id")int userId);
 }

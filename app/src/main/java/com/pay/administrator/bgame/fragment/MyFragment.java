@@ -78,7 +78,6 @@ public class MyFragment extends BaseFragment {
     TextView tvInviteContent;
     @BindView(R.id.rl_invite)
     RelativeLayout rlInvite;
-    Unbinder unbinder;
 
     @Override
     protected void initView() {
@@ -108,11 +107,7 @@ public class MyFragment extends BaseFragment {
 
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
-    }
+
 
     @OnClick({R.id.iv_setting, R.id.rl_like, R.id.rl_vip, R.id.rl_invite,R.id.tv_feedback, R.id.tv_notice})
     public void onViewClicked(View view) {
@@ -136,7 +131,7 @@ public class MyFragment extends BaseFragment {
     }
 
     public void getUserInfo() {
-        RetrofitFactory.getInstance().getuserInfo()
+        RetrofitFactory.getInstance().getuserInfo(22)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new BaseCosumer<UserInfo>() {
