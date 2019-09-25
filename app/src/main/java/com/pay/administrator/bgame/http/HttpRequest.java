@@ -76,5 +76,5 @@ public interface HttpRequest {
     Observable<TagBean> getNoticeList(@Query("pageNum") int page,@Query("user_id")int user_id);
 
     @GET("/namol/api/app/v1/collect")
-    Observable<TagBean> getLikeVideo();
+    Observable<TagBean> getLikeVideo(@Query("user_id") int userId);
 }

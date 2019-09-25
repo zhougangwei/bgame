@@ -54,27 +54,10 @@ public class MylikeActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        RetrofitFactory.getInstance().getLikeVideo()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseCosumer<TagBean>() {
-                    @Override
-                    public void onGetData(TagBean baseBean) {
-                        if (ResultUtils.cheekSuccess(baseBean)) {
-                            if (baseBean.getData()!=null) {
-                                datas.clear();
-                                datas.addAll(baseBean.getData());
-                            }
-                            likeAdapter.notifyDataSetChanged();
-                        }
-                    }
-                });
-
-
+        getData(true);
     }
 
-    private void getData() {
-    }
+
 
     private void getData(final boolean isRefresh) {
         if (!isLoadMore) {
@@ -85,7 +68,7 @@ public class MylikeActivity extends BaseActivity {
         } else {
             page++;
         }
-        RetrofitFactory.getInstance().getMyLikeList(1)
+        RetrofitFactory.getInstance().getLikeVideo(22)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new BaseCosumer<TagBean>() {

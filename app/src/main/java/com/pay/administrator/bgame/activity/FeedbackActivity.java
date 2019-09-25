@@ -3,13 +3,18 @@ package com.pay.administrator.bgame.activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.pay.administrator.bgame.R;
 import com.pay.administrator.bgame.base.BaseActivity;
 
+import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.buildins.UIUtil;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
@@ -18,9 +23,20 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTit
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.LinePagerIndicator;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView;
 
-public class FeedbackActivity extends BaseActivity{
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+public class FeedbackActivity extends BaseActivity {
 
 
+    @BindView(R.id.iv_back)
+    ImageView ivBack;
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
+    @BindView(R.id.magic_indicator)
+    MagicIndicator magicIndicator;
+    @BindView(R.id.vp)
+    ViewPager vp;
     private String[] titles;
 
     @Override
@@ -35,7 +51,7 @@ public class FeedbackActivity extends BaseActivity{
 
     @Override
     protected void initView() {
-        titles = new String[]{"Feedback","MyFeedback"};
+        titles = new String[]{"Feedback", "MyFeedback"};
         CommonNavigator commonNavigator7 = new CommonNavigator(this);
         commonNavigator7.setAdapter(new CommonNavigatorAdapter() {
             @Override
@@ -56,7 +72,7 @@ public class FeedbackActivity extends BaseActivity{
                     }
                 });
 
-                simplePagerTitleView.setTypeface(Typeface.DEFAULT , Typeface.BOLD );
+                simplePagerTitleView.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
                 return simplePagerTitleView;
             }
 
@@ -74,6 +90,13 @@ public class FeedbackActivity extends BaseActivity{
                 return indicator;
             }
         });
-        mTab.setNavigator(commonNavigator7);
+        magicIndicator.setNavigator(commonNavigator7);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }
