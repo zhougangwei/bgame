@@ -5,15 +5,24 @@ import com.pay.administrator.bgame.bean.BaseBean;
 import com.pay.administrator.bgame.bean.HomeMovieBean;
 import com.pay.administrator.bgame.bean.LikeBean;
 import com.pay.administrator.bgame.bean.LoginBean;
+import com.pay.administrator.bgame.bean.NoticeBean;
 import com.pay.administrator.bgame.bean.TagBean;
 import com.pay.administrator.bgame.bean.UserInfo;
 import com.pay.administrator.bgame.bean.VideoBean;
 
+import java.util.Map;
+
+import io.reactivex.Completable;
 import io.reactivex.Observable;
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
+import retrofit2.http.PartMap;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -76,4 +85,16 @@ public interface HttpRequest {
 
     @GET("/namol/api/app/v1/collect")
     Observable<LikeBean> getLikeVideo(@Query("user_id")int userId);
+
+    @POST("/namol/api/app/v1/feedBack")
+    Observable<BaseBean> feedBack(@Body RequestBody requestBody);
+    RequestBody feedBack(@JsonQuery String dataJson
+    );
+
+
+    @Multipart
+    @POST("Work/UploadVideoInfo?type=PHOTO")
+    Observable<BaseBean> uploadPic(
+            @Part MultipartBody.Part... files);
+
 }

@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.pay.administrator.bgame.R;
+import com.pay.administrator.bgame.activity.FeedbackActivity;
 import com.pay.administrator.bgame.activity.MylikeActivity;
 import com.pay.administrator.bgame.activity.NoticeListActivity;
 import com.pay.administrator.bgame.activity.SettingActivity;
@@ -103,8 +104,6 @@ public class MyFragment extends BaseFragment {
 
     private void getLike() {
 
-
-
     }
 
 
@@ -123,6 +122,7 @@ public class MyFragment extends BaseFragment {
             case R.id.rl_invite:
                 break;
             case R.id.tv_feedback:
+                startActivity(new Intent(getActivity(), FeedbackActivity.class));
                 break;
             case R.id.tv_notice:
                 startActivity(new Intent(getActivity(), NoticeListActivity.class));

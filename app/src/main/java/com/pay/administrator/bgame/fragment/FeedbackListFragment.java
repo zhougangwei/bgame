@@ -1,11 +1,8 @@
-package com.pay.administrator.bgame.activity;
+package com.pay.administrator.bgame.fragment;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,52 +10,44 @@ import android.widget.TextView;
 import com.blankj.utilcode.utils.LogUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.pay.administrator.bgame.R;
+import com.pay.administrator.bgame.activity.VideoActivity;
 import com.pay.administrator.bgame.adapter.SearchAdapter;
-import com.pay.administrator.bgame.base.BaseActivity;
+import com.pay.administrator.bgame.base.BaseFragment;
 import com.pay.administrator.bgame.base.Contact;
+import com.pay.administrator.bgame.base.UserInfoConfig;
 import com.pay.administrator.bgame.bean.BaseBean;
 import com.pay.administrator.bgame.bean.TagBean;
 import com.pay.administrator.bgame.http.BaseCosumer;
 import com.pay.administrator.bgame.http.RetrofitFactory;
 import com.pay.administrator.bgame.utils.ResultUtils;
-import com.pay.administrator.bgame.utils.SPUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
-public class NoticeListActivity extends BaseActivity{
 
+public class FeedbackListFragment extends BaseFragment {
 
-    @BindView(R.id.iv_back)
-    ImageView          ivBack;
-    @BindView(R.id.tv_title)
-    TextView           tvTitle;
     @BindView(R.id.rv)
-    RecyclerView       rv;
+    RecyclerView rv;
     @BindView(R.id.swrl)
     SwipeRefreshLayout swrl;
 
     private int page;
-    private boolean                isLoadMore =true;
-    public  List<TagBean.DataBean> dataList   =new ArrayList<>();
-    private String                 TAG        ="NoticeListActivity";
-
+    private boolean isLoadMore=true;
+    public List<TagBean.DataBean> dataList=new ArrayList<>();
+    private String TAG="SearchFragment";
+    private String content;
     private SearchAdapter searchAdapter;
 
     @Override
     protected void initView() {
-        tvTitle.setText("Find");
-        ivBack.setVisibility(View.GONE);
         searchAdapter = new SearchAdapter(R.layout.item_search_video,dataList);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL,false);
         rv.setLayoutManager(layoutManager);
         rv.setAdapter(searchAdapter);
         swrl.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -85,27 +74,23 @@ public class NoticeListActivity extends BaseActivity{
         searchAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Intent intent = new Intent(NoticeListActivity.this, NoticeDetailActivity.class);
-                intent.putExtra("noticeId", dataList.get(position).getId());
-                startActivity(intent);
+                VideoActivity.startVideo(getActivity(),dataList.get(position).getId());
             }
         });
     }
 
-
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragmeng_feedback_list;
+    }
 
     @Override
     protected void initData() {
         getData(true);
     }
 
-    @Override
-    protected int getContentViewId() {
-        return R.layout.activity_notice_list;
-    }
-
     private void getData(final boolean isRefresh) {
-        if (!isLoadMore) {
+     /*   if (!isLoadMore) {
             return;
         }
         if (isRefresh) {
@@ -113,7 +98,7 @@ public class NoticeListActivity extends BaseActivity{
         } else {
             page++;
         }
-        RetrofitFactory.getInstance().getNoticeList(page, Contact.PAGE_SIZE)
+        RetrofitFactory.getInstance().getFeedbackList(UserInfoConfig.getUserId(),page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new BaseCosumer<TagBean>() {
@@ -137,15 +122,14 @@ public class NoticeListActivity extends BaseActivity{
                         searchAdapter.disableLoadMoreIfNotFullPage(rv);
 
                     }
-                });
+                });*/
     }
 
 
-    @OnClick({R.id.iv_back})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.iv_back:
-                break;
-        }
-    }
+
+
+
+
+
+
 }

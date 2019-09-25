@@ -27,4 +27,5 @@ public class Contact {
     public static final String LANGUAGE_AR = "ar";
 
 
+    public static final int REQUEST_CODE_CHOOSE = 667;
 }
