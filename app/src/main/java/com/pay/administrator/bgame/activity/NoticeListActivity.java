@@ -85,7 +85,9 @@ public class NoticeListActivity extends BaseActivity{
         searchAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                VideoActivity.startVideo(NoticeListActivity.this,dataList.get(position).getId());
+                Intent intent = new Intent(NoticeListActivity.this, NoticeDetailActivity.class);
+                intent.putExtra("noticeId", dataList.get(position).getId());
+                startActivity(intent);
             }
         });
     }

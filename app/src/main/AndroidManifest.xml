@@ -11,6 +11,8 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
     <uses-permission android:name="com.android.vending.BILLING"/>
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
 
     <application
         android:name=".base.App"
@@ -47,6 +49,7 @@
         <activity android:name=".activity.NoticeListActivity" />
         <activity android:name=".activity.LoginSmsActivity"/>
         <activity android:name=".activity.NoticeListActivity"/>
+        <activity android:name=".activity.FeedbackActivity" />
     </application>
 
 </manifest>

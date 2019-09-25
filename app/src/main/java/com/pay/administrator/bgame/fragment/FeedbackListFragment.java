@@ -90,7 +90,7 @@ public class FeedbackListFragment extends BaseFragment {
     }
 
     private void getData(final boolean isRefresh) {
-        if (!isLoadMore) {
+     /*   if (!isLoadMore) {
             return;
         }
         if (isRefresh) {
@@ -122,7 +122,7 @@ public class FeedbackListFragment extends BaseFragment {
                         searchAdapter.disableLoadMoreIfNotFullPage(rv);
 
                     }
-                });
+                });*/
     }
 
 
@@ -130,14 +130,6 @@ public class FeedbackListFragment extends BaseFragment {
 
 
 
-    @OnClick({R.id.iv_back, R.id.iv_search})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.iv_back:
-                break;
-            case R.id.iv_search:
-                break;
-        }
-    }
+
 
 }

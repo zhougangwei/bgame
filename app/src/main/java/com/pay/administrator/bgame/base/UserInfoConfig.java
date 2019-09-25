@@ -9,7 +9,6 @@ public class UserInfoConfig {
     public static int getUserId() {
         return userId;
     }
-
     public static void setUserId(int userId) {
         userId = userId;
     }
