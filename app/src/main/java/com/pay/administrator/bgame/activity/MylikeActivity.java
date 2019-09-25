@@ -19,6 +19,7 @@ import com.pay.administrator.bgame.bean.BaseBean;
 import com.pay.administrator.bgame.base.Contact;
 import com.pay.administrator.bgame.bean.BaseBean;
 import com.pay.administrator.bgame.bean.HomeMovieBean;
+import com.pay.administrator.bgame.bean.LikeBean;
 import com.pay.administrator.bgame.bean.TagBean;
 import com.pay.administrator.bgame.http.BaseCosumer;
 import com.pay.administrator.bgame.http.RetrofitFactory;
@@ -47,7 +48,7 @@ public class MylikeActivity extends BaseActivity {
     SwipeRefreshLayout swrl;
 
     private LikeAdapter likeAdapter;
-    private List<TagBean.DataBean> datas = new ArrayList<>();
+    private List<LikeBean.DataBean> datas = new ArrayList<>();
     private boolean edit=false;
     private int page;
     private boolean isLoadMore=true;
@@ -71,9 +72,9 @@ public class MylikeActivity extends BaseActivity {
         RetrofitFactory.getInstance().getLikeVideo(22)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseCosumer<TagBean>() {
+                .subscribe(new BaseCosumer<LikeBean>() {
                     @Override
-                    public void onGetData(TagBean tagbean) {
+                    public void onGetData(LikeBean tagbean) {
                         if (!ResultUtils.cheekSuccess(tagbean)) {
                             likeAdapter.loadMoreFail();
                             return;

@@ -6,6 +6,7 @@ import com.pay.administrator.bgame.bean.HomeMovieBean;
 import com.pay.administrator.bgame.bean.LikeBean;
 import com.pay.administrator.bgame.bean.LoginBean;
 import com.pay.administrator.bgame.bean.NoticeBean;
+import com.pay.administrator.bgame.bean.PicBean;
 import com.pay.administrator.bgame.bean.TagBean;
 import com.pay.administrator.bgame.bean.UserInfo;
 import com.pay.administrator.bgame.bean.VideoBean;
@@ -91,10 +92,11 @@ public interface HttpRequest {
     RequestBody feedBack(@JsonQuery String dataJson
     );
 
-
     @Multipart
-    @POST("Work/UploadVideoInfo?type=PHOTO")
-    Observable<BaseBean> uploadPic(
+    @POST("/namol/api/app/v1/upload?type=FEEDBACK")
+    Observable<PicBean> uploadPic(
             @Part MultipartBody.Part... files);
 
+    @GET("/namol/api/app/v1/feedBackList")
+    Observable<TagBean> getFeedbackList(@Query("user_id")int userId,@Query("pageNum")int pageNum);
 }

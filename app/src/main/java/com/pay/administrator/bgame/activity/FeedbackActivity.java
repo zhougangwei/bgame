@@ -1,7 +1,10 @@
 package com.pay.administrator.bgame.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageView;
@@ -22,19 +25,21 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTit
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.LinePagerIndicator;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.ClipPagerTitleView;
 
+import java.util.List;
+
 import butterknife.BindView;
 
 public class FeedbackActivity extends BaseActivity {
 
 
     @BindView(R.id.iv_back)
-    ImageView ivBack;
+    ImageView      ivBack;
     @BindView(R.id.tv_title)
-    TextView tvTitle;
+    TextView       tvTitle;
     @BindView(R.id.magic_indicator)
     MagicIndicator magicIndicator;
     @BindView(R.id.vp)
-    ViewPager vp;
+    ViewPager      vp;
     private String[] titles;
 
     @Override
@@ -50,6 +55,7 @@ public class FeedbackActivity extends BaseActivity {
     protected void initView() {
         initMagicIndicator3();
     }
+
     private void initMagicIndicator3() {
         titles = new String[]{"Feedback", "MyFeedback"};
         magicIndicator.setBackgroundResource(R.drawable.round_indicator_bg);
@@ -59,14 +65,15 @@ public class FeedbackActivity extends BaseActivity {
         commonNavigator.setAdapter(new CommonNavigatorAdapter() {
             @Override
             public int getCount() {
-                 return titles.length;
+                return titles.length;
             }
+
             @Override
             public IPagerTitleView getTitleView(Context context, final int index) {
                 ClipPagerTitleView clipPagerTitleView = new ClipPagerTitleView(context);
                 clipPagerTitleView.setText(titles[index]);
-                clipPagerTitleView.setTextColor(Color.parseColor("#e94220"));
-                clipPagerTitleView.setClipColor(Color.WHITE);
+                clipPagerTitleView.setTextColor(Color.parseColor("#FF888888"));
+                clipPagerTitleView.setClipColor(Color.BLACK);
                 clipPagerTitleView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -79,7 +86,7 @@ public class FeedbackActivity extends BaseActivity {
             @Override
             public IPagerIndicator getIndicator(Context context) {
                 LinePagerIndicator indicator = new LinePagerIndicator(context);
-                float navigatorHeight = SizeUtils.dp2px(FeedbackActivity.this,25);
+                float navigatorHeight = SizeUtils.dp2px(FeedbackActivity.this, 25);
                 float borderWidth = UIUtil.dip2px(context, 1);
                 float lineHeight = navigatorHeight - 2 * borderWidth;
                 indicator.setLineHeight(lineHeight);
@@ -93,5 +100,31 @@ public class FeedbackActivity extends BaseActivity {
         ViewPagerHelper.bind(magicIndicator, vp);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        FragmentManager fragmentManager=getSupportFragmentManager();
+        for(int indext=0;indext<fragmentManager.getFragments().size();indext++)
+        {
+            Fragment fragment=fragmentManager.getFragments().get(indext); //找到第一层Fragment
+            if(fragment!=null)
+                handleResult(fragment,requestCode,resultCode,data);
+        }
 
+
+
+    }
+    private void handleResult(Fragment fragment,int requestCode,int resultCode,Intent data)
+    {
+        fragment.onActivityResult(requestCode, resultCode, data);//调用每个Fragment的onActivityResult
+
+        List<Fragment> childFragment = fragment.getChildFragmentManager().getFragments(); //找到第二层Fragment
+        if(childFragment!=null)
+            for(Fragment f:childFragment)
+                if(f!=null)
+                {
+                    handleResult(f, requestCode, resultCode, data);
+                }
+
+    }
 }

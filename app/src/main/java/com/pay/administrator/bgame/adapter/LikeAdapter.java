@@ -59,7 +59,7 @@ public class LikeAdapter extends BaseQuickAdapter<LikeBean.DataBean, BaseViewHol
             helper.setVisible(R.id.iv_check,false);
         }
         helper.addOnClickListener(R.id.iv_check);
-        Glide.with(mContext).load(item.getLogo()).into((ImageView) helper.getView(R.id.iv));
+        Glide.with(mContext).load(item.getLogo()).into((ImageView) helper.getView(R.id.iv_head));
 
     }
 }

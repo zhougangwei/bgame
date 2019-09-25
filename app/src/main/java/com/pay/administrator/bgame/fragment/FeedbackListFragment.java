@@ -90,7 +90,7 @@ public class FeedbackListFragment extends BaseFragment {
     }
 
     private void getData(final boolean isRefresh) {
-     /*   if (!isLoadMore) {
+      if (!isLoadMore) {
             return;
         }
         if (isRefresh) {
@@ -120,9 +120,8 @@ public class FeedbackListFragment extends BaseFragment {
                         dataList.addAll(tagbean.getData());
                         searchAdapter.notifyDataSetChanged();
                         searchAdapter.disableLoadMoreIfNotFullPage(rv);
-
                     }
-                });*/
+                });
     }
 
 

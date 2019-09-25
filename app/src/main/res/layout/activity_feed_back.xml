@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#111111"
+    android:background="@color/colorPrimary"
 
     tools:context="com.pay.administrator.bgame.activity.LoginActivity">
     <include
@@ -14,11 +14,12 @@
         layout="@layout/include_top_toolbar"/>
 
     <net.lucode.hackware.magicindicator.MagicIndicator
+
         android:id="@+id/magic_indicator"
         android:layout_width="wrap_content"
-        android:layout_height="25dp"
+        android:layout_height="50dp"
         android:layout_marginEnd="8dp"
-        android:background="@null"
+        android:background="@color/colorPrimary"
         android:paddingStart="11dp"
         android:paddingTop="22dp"
         app:layout_constraintEnd_toEndOf="parent"
