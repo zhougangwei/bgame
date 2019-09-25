@@ -57,7 +57,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_choose_country"/>
 
     <include
-        android:id="@+id/include3"
+        android:id="@+id/tv_submit"
         layout="@layout/include_submit"
         android:layout_width="0dp"
         android:layout_height="44dp"
@@ -82,7 +82,7 @@
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include3"/>
+        app:layout_constraintTop_toBottomOf="@+id/tv_submit"/>
 
 
 </android.support.constraint.ConstraintLayout>

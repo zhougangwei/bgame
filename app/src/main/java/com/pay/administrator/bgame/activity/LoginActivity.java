@@ -1,20 +1,19 @@
 package com.pay.administrator.bgame.activity;
 
 import android.content.Intent;
-import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.pay.administrator.bgame.R;
 import com.pay.administrator.bgame.base.BaseActivity;
+import com.pay.administrator.bgame.utils.SPUtil;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class LoginActivity extends BaseActivity {
-
 
     @BindView(R.id.iv_phone)
     ImageView ivPhone;
@@ -40,12 +39,11 @@ public class LoginActivity extends BaseActivity {
 
     }
 
-
-
     @OnClick({R.id.iv_phone, R.id.iv_facevook, R.id.iv_google, R.id.tv_rule})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_phone:
+
                 startActivity(new Intent(this,LoginMobileActivity.class));
                 break;
             case R.id.iv_facevook:

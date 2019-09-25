@@ -6,6 +6,7 @@ import com.pay.administrator.bgame.bean.HomeMovieBean;
 import com.pay.administrator.bgame.bean.LoginBean;
 import com.pay.administrator.bgame.bean.NoticeBean;
 import com.pay.administrator.bgame.bean.TagBean;
+import com.pay.administrator.bgame.bean.UserInfo;
 import com.pay.administrator.bgame.bean.VideoBean;
 
 import io.reactivex.Completable;
@@ -44,8 +45,12 @@ public interface HttpRequest {
     @POST("/namol/api/app/v1/movie/share/{vid}")
     Observable<BaseBean> addShare(@Path("vid")String vid);
 
-    @GET("/namol/api/app/v1/login")
-    Observable<BaseBean> loginPhone();
+    @POST("/namol/api/app/v1/login")
+    Observable<LoginBean> loginPhone(@Body RequestBody requestBody);
+
+    RequestBody loginPhone(@Query("telephone")String telephone,@Query("password")String password
+    );
+
 
     @POST("/namol/api/app/v1/sendMsgCode")
     Observable<BaseBean> sendMsgCode(@Query("telephone") String telephone);
@@ -55,13 +60,21 @@ public interface HttpRequest {
 
     RequestBody userRegister(@JsonQuery String dataJson
     );
+    @POST("/namol/api/app/v1/checkMsgCode")
+    Observable<BaseBean> verSmsCode(@Body RequestBody requestBody);
 
-    @GET("/namol/api/app/v1/collect")
-    Observable<TagBean> getMyLikeList(@Query("user_id")int userid);
+    RequestBody verSmsCode(@Query("telephone")String telephone,@Query("code")String code
+    );
+
+    @POST("/namol/api/app/v1/checkMsgCode")
+    Observable<BaseBean> appInstall();
+
+    @GET("/namol/api/app/v1/userInfo")
+    Observable<UserInfo> getuserInfo();
 
     @GET("/namol/api/app/v1/noticeList")
-    Observable<TagBean> getNoticeList(@Query("user_id")int userid,@Query("pageNum")int pageNum);
+    Observable<TagBean> getNoticeList(@Query("pageNum") int page,@Query("user_id")int user_id);
 
-    @GET("/namol/api/app/v1/feedBackList")
-    Observable<TagBean> getFeedbackList(@Query("user_id")int userid,@Query("pageNum")int pageNum);
+    @GET("/namol/api/app/v1/collect")
+    Observable<TagBean> getLikeVideo();
 }

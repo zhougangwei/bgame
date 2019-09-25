@@ -1,16 +1,16 @@
 package com.pay.administrator.bgame.activity;
 
-import android.content.Intent;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.pay.administrator.bgame.R;
 import com.pay.administrator.bgame.adapter.TabAdapter;
 import com.pay.administrator.bgame.base.BaseActivity;
-import com.pay.administrator.bgame.bean.LoginBean;
+import com.pay.administrator.bgame.bean.BaseBean;
 import com.pay.administrator.bgame.dialog.CommonDialog;
-import com.pay.administrator.bgame.utils.GsonUtil;
+import com.pay.administrator.bgame.http.BaseCosumer;
+import com.pay.administrator.bgame.http.RetrofitFactory;
+import com.pay.administrator.bgame.utils.ResultUtils;
 import com.pay.administrator.bgame.utils.SPUtil;
 import com.pay.administrator.bgame.wight.NoScrollViewPager;
 
@@ -19,6 +19,8 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 
 public class MainActivity extends BaseActivity {
@@ -37,7 +39,7 @@ public class MainActivity extends BaseActivity {
     private TabAdapter mTabAdapter;
 
     List<View> viewList = new ArrayList<>();
-    private LoginBean.DataBean.MemberBean memberBean;
+
 
 
 
@@ -60,13 +62,29 @@ public class MainActivity extends BaseActivity {
         viewList.add(ivMsg);
         viewList.add(ivMy);
         setClicked(ivHome);
-
+        judgeFirst();
     }
+
+    private void judgeFirst() {
+        if (SPUtil.getInstance().isFirstTime()){
+            RetrofitFactory.getInstance().appInstall()
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new BaseCosumer<BaseBean>() {
+                        @Override
+                        public void onGetData(BaseBean baseBean) {
+                            if (ResultUtils.cheekSuccess(baseBean)) {
+                                SPUtil.getInstance().setFirstTime();
+                            }
+                        }
+                    });
+        }
+    }
+
     @Override
     protected void initData() {
 
     }
-
     @Override
     public void onBackPressed() {
         long newTime = System.currentTimeMillis();

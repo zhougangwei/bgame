@@ -55,12 +55,13 @@ public class LoginSmsActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        mTvTitle.setText("Please enter Mobile number");
         mTvSubmit.setText("Send the verification code   ");
 
     }
 
 
-    @OnClick({R.id.iv_back, R.id.tv_submit, R.id.tv_rule, R.id.tv_choose_country})
+    @OnClick({R.id.iv_back, R.id.tv_submit,  R.id.tv_choose_country})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
@@ -68,9 +69,6 @@ public class LoginSmsActivity extends BaseActivity {
                 break;
             case R.id.tv_submit:
                 startSendSms();
-                break;
-
-            case R.id.tv_rule:
                 break;
             case R.id.tv_choose_country:
                 chooseCountry();
@@ -90,9 +88,6 @@ public class LoginSmsActivity extends BaseActivity {
             }
         }
     }
-
-
-
 
 
     private void chooseCountry() {

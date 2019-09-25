@@ -15,6 +15,7 @@ import com.pay.administrator.bgame.R;
 import com.pay.administrator.bgame.adapter.LikeAdapter;
 import com.pay.administrator.bgame.adapter.SearchAdapter;
 import com.pay.administrator.bgame.base.BaseActivity;
+import com.pay.administrator.bgame.bean.BaseBean;
 import com.pay.administrator.bgame.base.Contact;
 import com.pay.administrator.bgame.bean.BaseBean;
 import com.pay.administrator.bgame.bean.HomeMovieBean;
@@ -53,7 +54,23 @@ public class MylikeActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        getData();
+        RetrofitFactory.getInstance().getLikeVideo()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new BaseCosumer<TagBean>() {
+                    @Override
+                    public void onGetData(TagBean baseBean) {
+                        if (ResultUtils.cheekSuccess(baseBean)) {
+                            if (baseBean.getData()!=null) {
+                                datas.clear();
+                                datas.addAll(baseBean.getData());
+                            }
+                            likeAdapter.notifyDataSetChanged();
+                        }
+                    }
+                });
+
+
     }
 
     private void getData() {

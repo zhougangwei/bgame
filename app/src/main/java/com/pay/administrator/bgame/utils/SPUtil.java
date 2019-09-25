@@ -17,7 +17,8 @@ public class SPUtil {
 
     private volatile static SPUtil spu = null;
 
-    private final static String SHARED_NAME = "hala";
+    private final static String SHARED_NAME = "normal";
+    private String mToken;
 
     public SPUtil(Context context) {
         this.sp = context.getSharedPreferences(SHARED_NAME, 0);
@@ -113,5 +114,21 @@ public class SPUtil {
     }
     public int getUserId() {
        return getInt(Contact.USER_ID,0);
+    }
+
+    public void setToken(String token) {
+        setString("token",token);
+
+    }
+    public String getToken() {
+        return getString("token");
+    }
+
+    public boolean isFirstTime() {
+        return getBoolean("firsttime",false);
+    }
+
+    public void setFirstTime() {
+         setBoolean("firsttime",true);
     }
 }

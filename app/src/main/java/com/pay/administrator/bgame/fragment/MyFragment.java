@@ -11,14 +11,21 @@ import android.widget.TextView;
 
 import com.pay.administrator.bgame.R;
 import com.pay.administrator.bgame.activity.MylikeActivity;
+import com.pay.administrator.bgame.activity.NoticeListActivity;
 import com.pay.administrator.bgame.activity.SettingActivity;
 import com.pay.administrator.bgame.base.BaseFragment;
+import com.pay.administrator.bgame.bean.BaseBean;
+import com.pay.administrator.bgame.bean.UserInfo;
+import com.pay.administrator.bgame.http.BaseCosumer;
 import com.pay.administrator.bgame.http.RetrofitFactory;
+import com.pay.administrator.bgame.utils.ResultUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 public class MyFragment extends BaseFragment {
 
@@ -37,8 +44,8 @@ public class MyFragment extends BaseFragment {
     ImageView imageView2;
     @BindView(R.id.textView3)
     TextView textView3;
-    @BindView(R.id.textView4)
-    TextView textView4;
+    @BindView(R.id.tv_count)
+    TextView tvCount;
     @BindView(R.id.textView5)
     TextView textView5;
     @BindView(R.id.textView6)
@@ -92,6 +99,7 @@ public class MyFragment extends BaseFragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         getLike();
+        getUserInfo();
     }
 
     private void getLike() {
@@ -122,8 +130,26 @@ public class MyFragment extends BaseFragment {
             case R.id.tv_feedback:
                 break;
             case R.id.tv_notice:
+                startActivity(new Intent(getActivity(), NoticeListActivity.class));
                 break;
         }
     }
 
+    public void getUserInfo() {
+        RetrofitFactory.getInstance().getuserInfo()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new BaseCosumer<UserInfo>() {
+                    @Override
+                    public void onGetData(UserInfo baseBean) {
+                        if (ResultUtils.cheekSuccess(baseBean)) {
+                            UserInfo.DataBean data = baseBean.getData();
+                            String name = data.getName();
+                            int remanidCount = data.getRemanidCount();
+                            tvName.setText(name);
+                            tvCount.setText(remanidCount+"/5");
+                        }
+                    }
+                });
+    }
 }

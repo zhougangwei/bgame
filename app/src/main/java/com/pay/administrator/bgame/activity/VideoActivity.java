@@ -4,8 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.net.Uri;
+import android.os.Bundle;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.DefaultRenderersFactory;
@@ -24,21 +28,22 @@ import com.google.android.exoplayer2.trackselection.TrackSelector;
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout;
 import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
 import com.google.android.exoplayer2.upstream.BandwidthMeter;
-
-import com.google.android.exoplayer2.upstream.DataSpec;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
-import com.google.android.exoplayer2.upstream.RawResourceDataSource;
-
 import com.pay.administrator.bgame.R;
 import com.pay.administrator.bgame.base.BaseActivity;
+import com.pay.administrator.bgame.base.Contact;
 import com.pay.administrator.bgame.bean.BaseBean;
 import com.pay.administrator.bgame.bean.VideoBean;
 import com.pay.administrator.bgame.http.BaseCosumer;
 import com.pay.administrator.bgame.http.RetrofitFactory;
 import com.pay.administrator.bgame.utils.CacheDataSourceFactory;
 import com.pay.administrator.bgame.utils.ResultUtils;
+import com.pay.administrator.bgame.utils.ToastUtils;
+import com.pay.administrator.bgame.utils.ToolUtils;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -48,18 +53,37 @@ public class VideoActivity extends BaseActivity {
 
     @BindView(R.id.player)
     SimpleExoPlayerView playerView;
+    @BindView(R.id.iv_like)
+    ImageView           mIvLike;
+    @BindView(R.id.textView12)
+    TextView            mTextView12;
+    @BindView(R.id.iv_report)
+    ImageView           mIvReport;
+    @BindView(R.id.iv_share)
+    ImageView           mIvShare;
+    @BindView(R.id.tv_title)
+    TextView            mTvTitle;
+    @BindView(R.id.tv_look_times)
+    TextView            mTvLookTimes;
+    @BindView(R.id.textView10)
+    TextView            mTextView10;
+    @BindView(R.id.textView11)
+    TextView            mTextView11;
+    @BindView(R.id.textView13)
+    TextView            mTextView13;
 
-    private String vid;
-    private SimpleExoPlayer exoPlayer;
+    private String               vid;
+    private SimpleExoPlayer      exoPlayer;
     private ExtractorMediaSource videoSource;
-    private LoopingMediaSource curVideoSource;
+    private LoopingMediaSource   curVideoSource;
 
-    public  static void startVideo(Context context,int vid){
-        Intent intent = new Intent(context,VideoActivity.class);
-        intent.putExtra("vid",vid);
+    public static void startVideo(Context context, int vid) {
+        Intent intent = new Intent(context, VideoActivity.class);
+        intent.putExtra("vid", vid + "");
         context.startActivity(intent);
 
     }
+
     @Override
     protected void initData() {
         RetrofitFactory.getInstance().getVideoDetail(vid)
@@ -69,7 +93,27 @@ public class VideoActivity extends BaseActivity {
                     @Override
                     public void onGetData(VideoBean baseBean) {
                         if (ResultUtils.cheekSuccess(baseBean)) {
-                            getMediaSource(baseBean.getData().getUrl());
+                            VideoBean.DataBean data = baseBean.getData();
+                            mTvLookTimes.setText(data.getPlayCount()+"times");
+                            String content="";
+                            switch (ToolUtils.getLanguage()) {
+                                case Contact.LANGUAGE_CHINA:
+                                    content=data.getTitleZh();
+                                    break;
+                                case Contact.LANGUAGE_ENGLISH:
+                                    content=data.getTitleEn();
+                                    break;
+                                case Contact.LANGUAGE_AR:
+                                    content=data.getTitleAl();
+                                    break;
+                                default:
+                                    content=data.getTitleEn();
+                                    break;
+                            }
+                            mTvTitle.setText(content);
+                            getMediaSource(data.getUrl());
+                        }else if(Contact.REPONSE_CODE_NO_VIDEO_TIMES==baseBean.getCode()){
+                            ToastUtils.showToast(VideoActivity.this,"you have no free times!");
                         }
                     }
                 });
@@ -93,13 +137,10 @@ public class VideoActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        initIntent(); int []arr =new int[]{};
+        initIntent();
         initExoplayer();
         initExo();
     }
-
-
-
 
     private void initIntent() {
         Intent intent = getIntent();
@@ -107,7 +148,7 @@ public class VideoActivity extends BaseActivity {
     }
 
 
-    private void addLike(){
+    private void addLike() {
         RetrofitFactory.getInstance().addVideoLike(vid)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -118,7 +159,8 @@ public class VideoActivity extends BaseActivity {
                     }
                 });
     }
-    private void addShare(){
+
+    private void addShare() {
         RetrofitFactory.getInstance().addShare(vid)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -131,37 +173,36 @@ public class VideoActivity extends BaseActivity {
     }
 
 
-
-
     private void initExoplayer() {
 
-            /*用来接收  滑动到哪儿了 但是 然后延迟一秒再去拿数据
-             * throttleLast 操作符
-             * */
-            BandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
-            TrackSelection.Factory videoTrackSelectionFactory =
-                    new AdaptiveTrackSelection.Factory(bandwidthMeter);
-            TrackSelector trackSelector = new DefaultTrackSelector(videoTrackSelectionFactory);
-            LoadControl loadControl = new DefaultLoadControl();
-            RenderersFactory renderersFactory = new DefaultRenderersFactory(this);
-            exoPlayer = ExoPlayerFactory.newSimpleInstance(renderersFactory, trackSelector, loadControl);
-            exoPlayer.setVolume(0);
-            exoPlayer.setRepeatMode(Player.REPEAT_MODE_ALL);
+        /*用来接收  滑动到哪儿了 但是 然后延迟一秒再去拿数据
+         * throttleLast 操作符
+         * */
+        BandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
+        TrackSelection.Factory videoTrackSelectionFactory =
+                new AdaptiveTrackSelection.Factory(bandwidthMeter);
+        TrackSelector trackSelector = new DefaultTrackSelector(videoTrackSelectionFactory);
+        LoadControl loadControl = new DefaultLoadControl();
+        RenderersFactory renderersFactory = new DefaultRenderersFactory(this);
+        exoPlayer = ExoPlayerFactory.newSimpleInstance(renderersFactory, trackSelector, loadControl);
+        exoPlayer.setVolume(0);
+        exoPlayer.setRepeatMode(Player.REPEAT_MODE_ALL);
 
 
-            exoPlayer.setPlayWhenReady(true);
+        exoPlayer.setPlayWhenReady(true);
 
     }
+
     private void initExo() {
 
         SurfaceView videoSurfaceView = (SurfaceView) playerView.getVideoSurfaceView();
 
-//        ViewGroup.LayoutParams layoutParams = playerView.getLayoutParams();
+        //        ViewGroup.LayoutParams layoutParams = playerView.getLayoutParams();
         //  layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE);
         //  layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
         //   layoutParams.gravity= Gravity.CENTER;
         //layoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
-//        playerView.setLayoutParams(layoutParams);
+        //        playerView.setLayoutParams(layoutParams);
         playerView.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_ZOOM);
 
         if (videoSurfaceView != null) {
@@ -173,5 +214,27 @@ public class VideoActivity extends BaseActivity {
         playerView.setPlayer(exoPlayer);
         playerView.setUseController(false);
 
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
+
+    @OnClick({R.id.iv_like, R.id.iv_report, R.id.iv_share})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.iv_like:
+                addLike();
+                break;
+            case R.id.iv_report:
+                ToastUtils.showToast(this,"Report success!");
+                break;
+            case R.id.iv_share:
+                addShare();
+                break;
+        }
     }
 }

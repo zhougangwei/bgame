@@ -31,11 +31,7 @@ public class AddInfoInterceptor implements Interceptor {
         final Request.Builder builder = chain.request().newBuilder();
         builder.addHeader("Content-Type", "application/json");
         builder.addHeader("system", "android");
-       /* String token = SPUtil.getInstance().getString(Contact.TOKEN, "");
-        if (!TextUtils.isEmpty(token)) {
-            builder.addHeader("Authorization","Bearer "+ token);
-        }*/
-        builder.addHeader("Authorization","Bearer "+ "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJuYW1vbCIsImp0aSI6IjhjYjY2Y2U5MmY2OTQ3Y2Y4NDM0YWYyZjFiYmUyODVjMTU2ODEwNzg2NzQwOSIsImlhdCI6MTU2ODEwNzg2Nywic3ViIjoie1widXNlcklkXCI6NH0iLCJleHAiOjE1NzcxMDc4Njd9.NK7UsAvZ1YRaVwCfwfPZnnC18LaHD2lo1F8DEVdIOBY");
+        builder.addHeader("Authorization","Bearer "+ SPUtil.getInstance().getToken());
         builder.addHeader("Accept-Language", ToolUtils.getLanguage());
         return chain.proceed(builder.build());
     }
