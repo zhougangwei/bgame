@@ -43,7 +43,7 @@ public class NoticeAdapter extends BaseQuickAdapter<NoticeBean.DataBean.ListBean
                 content=item.getContentAl();
                 break;
             default:
-                content=item.getTitleEn();
+                content=item.getContentEn();
                 break;
         }
 

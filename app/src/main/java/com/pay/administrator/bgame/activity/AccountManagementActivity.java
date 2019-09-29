@@ -1,5 +1,6 @@
 package com.pay.administrator.bgame.activity;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -40,6 +41,7 @@ public class AccountManagementActivity extends BaseActivity {
     @BindView(R.id.ll_change_psw)
     LinearLayout llChangePsw;
 
+
     @Override
     protected void initData() {
 
@@ -53,14 +55,15 @@ public class AccountManagementActivity extends BaseActivity {
     @Override
     protected void initView() {
         getUserInfo();
-
-
-
+        tvTitle.setText("Account management");
     }
 
-    @OnClick({R.id.iv_back, R.id.ll_account_management, R.id.ll_nick_name, R.id.ll_mobile, R.id.ll_change_psw})
+    @OnClick({R.id.tv_exit,R.id.iv_back, R.id.ll_account_management, R.id.ll_nick_name, R.id.ll_mobile, R.id.ll_change_psw})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            case R.id.tv_exit:
+                finish();
+                break;
             case R.id.iv_back:
                 finish();
                 break;
@@ -71,6 +74,7 @@ public class AccountManagementActivity extends BaseActivity {
             case R.id.ll_mobile:
                 break;
             case R.id.ll_change_psw:
+                startActivity(new Intent(this,ActivityChangePswActivity.class));
                 break;
         }
     }

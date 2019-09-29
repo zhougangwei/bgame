@@ -28,7 +28,8 @@ public class NoticeDetailActivity extends BaseActivity {
     ImageView ivBack;
     @BindView(R.id.tv_title)
     TextView tvTitle;
-
+    @BindView(R.id.tv_titl)
+    TextView tvTitl;
     @BindView(R.id.tv_time)
     TextView tvTime;
     @BindView(R.id.tv_content)
@@ -61,7 +62,7 @@ public class NoticeDetailActivity extends BaseActivity {
                 content=item.getContentAl();
                 break;
             default:
-                content=item.getTitleEn();
+                content=item.getContentEn();
                 break;
         }
         tvContent.setText(content);
@@ -80,7 +81,7 @@ public class NoticeDetailActivity extends BaseActivity {
                 title=item.getTitleEn();
                 break;
         }
-        tvTitle.setText(title);
+        tvTitl.setText(title);
         tvTime.setText(TimeUtils.date2String(TimeUtils.string2Date("2019-09-23 20:01:00"),new SimpleDateFormat("yyyy-MM-dd")));
     }
 

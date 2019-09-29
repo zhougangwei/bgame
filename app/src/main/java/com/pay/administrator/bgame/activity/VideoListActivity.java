@@ -149,7 +149,7 @@ public class VideoListActivity extends BaseActivity {
                 float lineHeight = navigatorHeight - 2 * borderWidth;
                 indicator.setLineHeight(lineHeight);
                 indicator.setRoundRadius(lineHeight / 2);
-                indicator.setYOffset(borderWidth);
+                indicator.setYOffset(UIUtil.dip2px(context, 5));
                 indicator.setColors(Color.parseColor("#FFFFC937"));
                 return indicator;
             }

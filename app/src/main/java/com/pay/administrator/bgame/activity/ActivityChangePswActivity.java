@@ -4,14 +4,23 @@ import android.app.Activity;
 import android.os.Bundle;
 
 import com.pay.administrator.bgame.R;
+import com.pay.administrator.bgame.base.BaseActivity;
 
-public  class ActivityChangePswActivity extends Activity {
+public  class ActivityChangePswActivity extends BaseActivity {
 
 
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_change_psw);
-        }
+    @Override
+    protected void initData() {
 
     }
+
+    @Override
+    protected int getContentViewId() {
+        return R.layout.activity_change_psw;
+    }
+
+    @Override
+    protected void initView() {
+
+    }
+}
