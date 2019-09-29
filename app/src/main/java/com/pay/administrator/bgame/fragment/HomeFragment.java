@@ -14,6 +14,7 @@ import com.blankj.utilcode.utils.LogUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.pay.administrator.bgame.R;
 import com.pay.administrator.bgame.activity.SearchActivity;
+import com.pay.administrator.bgame.activity.VideoListActivity;
 import com.pay.administrator.bgame.adapter.GlideImageLoader;
 import com.pay.administrator.bgame.adapter.HotCallAdapter;
 import com.pay.administrator.bgame.base.BaseFragment;
@@ -73,6 +74,18 @@ public class HomeFragment extends BaseFragment {
                     return 4;
                 }
                 return 1;
+            }
+        });
+
+        tagAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Intent intent = new Intent(getActivity(), VideoListActivity.class);
+                HomeMovieBean.DataBean dataBean = dataList.get(position);
+                if(dataBean!=null){
+                    intent.putExtra("tagId",dataBean.getType().getId());
+                    startActivity(intent);
+                }
             }
         });
 

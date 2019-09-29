@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import com.pay.administrator.bgame.R;
 import com.pay.administrator.bgame.adapter.TabAdapter;
 import com.pay.administrator.bgame.base.BaseActivity;
+import com.pay.administrator.bgame.base.UserInfoConfig;
 import com.pay.administrator.bgame.bean.BaseBean;
 import com.pay.administrator.bgame.dialog.CommonDialog;
 import com.pay.administrator.bgame.http.BaseCosumer;
@@ -79,6 +80,16 @@ public class MainActivity extends BaseActivity {
                         }
                     });
         }
+        RetrofitFactory.getInstance().active()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new BaseCosumer<BaseBean>() {
+                    @Override
+                    public void onGetData(BaseBean baseBean) {
+                        if (ResultUtils.cheekSuccess(baseBean)) {
+                        }
+                    }
+                });
     }
 
     @Override
@@ -89,6 +100,8 @@ public class MainActivity extends BaseActivity {
     public void onBackPressed() {
         long newTime = System.currentTimeMillis();
         if (newTime - oldTime < 3000) {
+
+
             finish();
         } else {
             new CommonDialog(this)
@@ -96,9 +109,10 @@ public class MainActivity extends BaseActivity {
                     .setListener(new CommonDialog.OnClickListener() {
                         @Override
                         public void onClickConfirm() {
+                            UserInfoConfig.clearData();
+
                             finish();
                         }
-
                         @Override
                         public void onClickCancel() {
                         }

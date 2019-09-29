@@ -1,17 +1,14 @@
 package com.pay.administrator.bgame.adapter;
 
-import android.nfc.Tag;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.pay.administrator.bgame.R;
 import com.pay.administrator.bgame.base.Contact;
 import com.pay.administrator.bgame.bean.HomeMovieBean;
-import com.pay.administrator.bgame.bean.TagBean;
+import com.pay.administrator.bgame.bean.VideoListBean;
 import com.pay.administrator.bgame.utils.ToolUtils;
 
 import java.util.ArrayList;
@@ -73,8 +70,8 @@ public class HotCallAdapter extends BaseMultiItemQuickAdapter<HomeMovieBean.Data
                 helper.setImageResource(R.id.iv,resIds[helper.getAdapterPosition()-1]);
                 break;
             case BOTTOM_ELSE:
-                List<TagBean.DataBean> recommendMovie = item.getRecommendMovie();
-                List<TagBean.DataBean> data = new ArrayList<>();
+                List<VideoListBean.DataBean> recommendMovie = item.getRecommendMovie();
+                List<VideoListBean.DataBean> data = new ArrayList<>();
                 if (recommendMovie != null) {
                     data.addAll(recommendMovie);
                 }
@@ -82,8 +79,8 @@ public class HotCallAdapter extends BaseMultiItemQuickAdapter<HomeMovieBean.Data
                 RecyclerView rv = helper.getView(R.id.rv);
                 GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 3);
                 rv.setLayoutManager(gridLayoutManager);
-                TagItemVideoAdapter tagItemVideoAdapter = new TagItemVideoAdapter(R.layout.item_home_video, data);
-                rv.setAdapter(tagItemVideoAdapter);
+                VideoItemVideoAdapter videoItemVideoAdapter = new VideoItemVideoAdapter(R.layout.item_home_video, data);
+                rv.setAdapter(videoItemVideoAdapter);
                 break;
         }
 

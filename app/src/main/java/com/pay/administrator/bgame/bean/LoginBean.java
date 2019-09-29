@@ -8,6 +8,15 @@ public class LoginBean extends BaseBean {
      */
 
     private String data;
+    private Integer userid;
+
+    public Integer getUserid() {
+        return userid;
+    }
+
+    public void setUserid(Integer userid) {
+        this.userid = userid;
+    }
 
     public String getData() {
         return data;

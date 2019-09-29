@@ -43,7 +43,6 @@ public class LoginActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_phone:
-
                 startActivity(new Intent(this,LoginMobileActivity.class));
                 break;
             case R.id.iv_facevook:

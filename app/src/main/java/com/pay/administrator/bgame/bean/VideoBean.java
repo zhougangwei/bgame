@@ -38,6 +38,7 @@ public class VideoBean  extends BaseBean{
          * logo : http://263d6t1992.wicp.vip/document/images/namol2019SEPTEMBER10/3060c6549b8548e98abb146f761709291568045300338.jpg
          * score : 9.0
          * playCount : 694
+         * likeFlag :false
          * aboutRecommend : [{"id":100057,"titleZh":"ReadWriteLock 读写锁","titleEn":"ReadWriteLock ","titleAl":"ReadWriteLock ","logo":"http://263d6t1992.wicp.vip/document/images/namol2019SEPTEMBER10/3ba59e0c49f041668d3b28f3e82b5c661568045117814.jpg","score":9,"playCount":2776},{"id":100033,"titleZh":"同步容器类 ConcurrentHashMap mm","titleEn":"ConcurrentHashMap mm","titleAl":"ConcurrentHashMap mm","logo":"http://263d6t1992.wicp.vip/document/images/namol2019SEPTEMBER10/d4bea05e8b6b4e71adaabc82b44815251568045666545.jpg","score":9,"playCount":4164}]
          */
 
@@ -52,7 +53,10 @@ public class VideoBean  extends BaseBean{
         private String                   logo;
         private double                   score;
         private int                      playCount;
+        private boolean                      likeFlag;
         private List<AboutRecommendBean> aboutRecommend;
+
+
 
         public int getId() {
             return id;
@@ -148,6 +152,14 @@ public class VideoBean  extends BaseBean{
 
         public void setAboutRecommend(List<AboutRecommendBean> aboutRecommend) {
             this.aboutRecommend = aboutRecommend;
+        }
+
+        public boolean isLikeFlag() {
+            return likeFlag;
+        }
+
+        public void setLikeFlag(boolean likeFlag) {
+            this.likeFlag = likeFlag;
         }
 
         public static class AboutRecommendBean {

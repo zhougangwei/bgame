@@ -1,5 +1,6 @@
 package com.pay.administrator.bgame.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,15 +11,9 @@ import android.widget.TextView;
 import com.pay.administrator.bgame.R;
 import com.pay.administrator.bgame.base.BaseActivity;
 import com.pay.administrator.bgame.base.Contact;
-import com.pay.administrator.bgame.bean.BaseBean;
-import com.pay.administrator.bgame.http.BaseCosumer;
-import com.pay.administrator.bgame.http.RetrofitFactory;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 
 public class LoginSmsActivity extends BaseActivity {
 
@@ -104,4 +99,6 @@ public class LoginSmsActivity extends BaseActivity {
 
 
     }
+
+
 }

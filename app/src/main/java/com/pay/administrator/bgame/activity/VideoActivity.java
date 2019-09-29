@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
@@ -37,6 +38,7 @@ import com.pay.administrator.bgame.bean.VideoBean;
 import com.pay.administrator.bgame.http.BaseCosumer;
 import com.pay.administrator.bgame.http.RetrofitFactory;
 import com.pay.administrator.bgame.utils.CacheDataSourceFactory;
+import com.pay.administrator.bgame.utils.GsonUtil;
 import com.pay.administrator.bgame.utils.ResultUtils;
 import com.pay.administrator.bgame.utils.ToastUtils;
 import com.pay.administrator.bgame.utils.ToolUtils;
@@ -51,6 +53,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class VideoActivity extends BaseActivity {
 
+    private static final String TAG = "VideoActivity";
     @BindView(R.id.player)
     SimpleExoPlayerView playerView;
     @BindView(R.id.iv_like)
@@ -81,7 +84,6 @@ public class VideoActivity extends BaseActivity {
         Intent intent = new Intent(context, VideoActivity.class);
         intent.putExtra("vid", vid + "");
         context.startActivity(intent);
-
     }
 
     @Override
@@ -93,8 +95,14 @@ public class VideoActivity extends BaseActivity {
                     @Override
                     public void onGetData(VideoBean baseBean) {
                         if (ResultUtils.cheekSuccess(baseBean)) {
+
                             VideoBean.DataBean data = baseBean.getData();
                             mTvLookTimes.setText(data.getPlayCount()+"times");
+                            if (data.isLikeFlag()){
+                                mIvLike.setSelected(true);
+                            }else{
+                                mIvLike.setSelected(false);
+                            }
                             String content="";
                             switch (ToolUtils.getLanguage()) {
                                 case Contact.LANGUAGE_CHINA:
@@ -155,7 +163,11 @@ public class VideoActivity extends BaseActivity {
                 .subscribe(new BaseCosumer<BaseBean>() {
                     @Override
                     public void onGetData(BaseBean tagbean) {
-
+                        Log.e(TAG, "onGetData: "+ GsonUtil.parseObjectToJson(tagbean));
+                       
+                        if (ResultUtils.cheekSuccess(tagbean)) {
+                            ToastUtils.showToast(VideoActivity.this,"like success!");
+                        }
                     }
                 });
     }
@@ -167,7 +179,7 @@ public class VideoActivity extends BaseActivity {
                 .subscribe(new BaseCosumer<BaseBean>() {
                     @Override
                     public void onGetData(BaseBean tagbean) {
-
+                        ToastUtils.showToast(VideoActivity.this,"share success!");
                     }
                 });
     }

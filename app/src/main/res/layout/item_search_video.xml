@@ -1,67 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="230dp"
-    tools:background="@color/black">
+    android:layout_height="80dp"
+    android:background="#FF262626">
+
     <ImageView
-        android:id="@+id/bg"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:id="@+id/iv_bg"
+        android:layout_width="125dp"
+        android:layout_height="match_parent"
+        android:layout_marginStart="15dp"
+        android:src="@color/grey"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <TextView
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="21dp"
-        android:layout_marginTop="14dp"
-        android:text="SoCool loving"
-        android:textColor="@color/white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-
-
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="I saw a lot of handsome"
+        android:textColor="#FFFFFFFF"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_num"
+        app:layout_constraintStart_toEndOf="@+id/iv_head"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_num"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/bg_look_num"
+        android:layout_marginBottom="10dp"
         android:drawableStart="@drawable/ic_eye_look"
         android:gravity="center_vertical"
-        android:paddingEnd="10dp"
         android:paddingStart="6dp"
+        android:paddingEnd="10dp"
         android:text="8892"
-        android:textColor="@color/white"
-        android:textSize="13sp"
+        android:textColor="#FF888888"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-    <ImageView
-        android:id="@+id/iv_share"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="6dp"
-        android:padding="10dp"
-        android:src="@drawable/ic_share"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-    <ImageView
-        android:id="@+id/iv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:src="@drawable/ic_video_play"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintStart_toStartOf="@+id/tv_name" />
 
 </android.support.constraint.ConstraintLayout>

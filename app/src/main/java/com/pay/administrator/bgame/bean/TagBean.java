@@ -1,23 +1,29 @@
 package com.pay.administrator.bgame.bean;
 
-import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
 /**
- * @author wjy on 2019/8/28/028.
+ * @author wjy on 2019/9/29/029.
  */
-public class TagBean extends BaseBean implements MultiItemEntity {
+public class TagBean extends BaseBean {
+    /**
+     * data : [{"id":16,"nameZh":"无码","nameEn":"No pixelation","nameAl":"بدون فسيفساء"},{"id":15,"nameZh":"欧美","nameEn":"European","nameAl":"أروبية وأمريكية"},{"id":14,"nameZh":"巨乳","nameEn":"Big boobs","nameAl":"ثدي كبيرة"},{"id":13,"nameZh":"人妻","nameEn":"Milf","nameAl":"زوجة"},{"id":12,"nameZh":"清纯","nameEn":"Pure","nameAl":"نقية"},{"id":11,"nameZh":"动漫","nameEn":"Anime","nameAl":"رسوم متحركة"},{"id":10,"nameZh":"自慰","nameEn":"Masturbation","nameAl":"العادة السريعة"},{"id":9,"nameZh":"今日HOT","nameEn":"Today's hot","nameAl":"شائعة اليوم"},{"id":7,"nameZh":"角色扮演","nameEn":"Role play","nameAl":"لعب الأدوار"},{"id":8,"nameZh":"肥臀","nameEn":"Big ass","nameAl":"حمارة كبيرة"},{"id":19,"nameZh":"日本","nameEn":"Japanese","nameAl":"يابان"},{"id":20,"nameZh":"多人","nameEn":"Group","nameAl":"كثير من الأشخاص"},{"id":21,"nameZh":"SM","nameEn":"SM","nameAl":"SM"},{"id":22,"nameZh":"小胸","nameEn":"Small boobs","nameAl":"ثدي صغيرة"},{"id":23,"nameZh":"文艺片","nameEn":"Literary film","nameAl":"أفلام أدبية"}]
+     * userid : null
+     */
 
-    public static final int TAGBEAN_MID_TYPE=0;
-    public static final int TAGBEAN_DETAIL=1;
+    @SerializedName("userid")
+    private Object userid;
     @SerializedName("data")
     private List<DataBean> data;
 
-    @Override
-    public int getItemType() {
-        return 0;
+    public Object getUserid() {
+        return userid;
+    }
+
+    public void setUserid(Object userid) {
+        this.userid = userid;
     }
 
     public List<DataBean> getData() {
@@ -30,31 +36,20 @@ public class TagBean extends BaseBean implements MultiItemEntity {
 
     public static class DataBean {
         /**
-         * id : 100057
-         * titleZh : ReadWriteLock 读写锁
-         * titleEn : ReadWriteLock
-         * titleAl : ReadWriteLock
-         * logo : http://263d6t1992.wicp.vip/document/images/namol2019SEPTEMBER10/3ba59e0c49f041668d3b28f3e82b5c661568045117814.jpg
-         * score : 9.0
-         * playCount : 0
+         * id : 16
+         * nameZh : 无码
+         * nameEn : No pixelation
+         * nameAl : بدون فسيفساء
          */
 
         @SerializedName("id")
         private int id;
-        @SerializedName("titleZh")
-        private String titleZh;
-        @SerializedName("titleEn")
-        private String titleEn;
-        @SerializedName("titleAl")
-        private String titleAl;
-        @SerializedName("logo")
-        private String logo;
-        @SerializedName("score")
-        private double score;
-        @SerializedName("playCount")
-        private int playCount;
-
-
+        @SerializedName("nameZh")
+        private String nameZh;
+        @SerializedName("nameEn")
+        private String nameEn;
+        @SerializedName("nameAl")
+        private String nameAl;
 
         public int getId() {
             return id;
@@ -64,54 +59,28 @@ public class TagBean extends BaseBean implements MultiItemEntity {
             this.id = id;
         }
 
-        public String getTitleZh() {
-            return titleZh;
+        public String getNameZh() {
+            return nameZh;
         }
 
-        public void setTitleZh(String titleZh) {
-            this.titleZh = titleZh;
+        public void setNameZh(String nameZh) {
+            this.nameZh = nameZh;
         }
 
-        public String getTitleEn() {
-            return titleEn;
+        public String getNameEn() {
+            return nameEn;
         }
 
-        public void setTitleEn(String titleEn) {
-            this.titleEn = titleEn;
+        public void setNameEn(String nameEn) {
+            this.nameEn = nameEn;
         }
 
-        public String getTitleAl() {
-            return titleAl;
+        public String getNameAl() {
+            return nameAl;
         }
 
-        public void setTitleAl(String titleAl) {
-            this.titleAl = titleAl;
+        public void setNameAl(String nameAl) {
+            this.nameAl = nameAl;
         }
-
-        public String getLogo() {
-            return logo;
-        }
-
-        public void setLogo(String logo) {
-            this.logo = logo;
-        }
-
-        public double getScore() {
-            return score;
-        }
-
-        public void setScore(double score) {
-            this.score = score;
-        }
-
-        public int getPlayCount() {
-            return playCount;
-        }
-
-        public void setPlayCount(int playCount) {
-            this.playCount = playCount;
-        }
-
-
     }
 }

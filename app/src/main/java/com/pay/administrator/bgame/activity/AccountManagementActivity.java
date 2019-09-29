@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.pay.administrator.bgame.R;
 import com.pay.administrator.bgame.base.BaseActivity;
+import com.pay.administrator.bgame.base.UserInfoConfig;
 import com.pay.administrator.bgame.bean.UserInfo;
 import com.pay.administrator.bgame.http.BaseCosumer;
 import com.pay.administrator.bgame.http.RetrofitFactory;
@@ -75,7 +76,7 @@ public class AccountManagementActivity extends BaseActivity {
     }
 
     public void getUserInfo() {
-        RetrofitFactory.getInstance().getuserInfo(22)
+        RetrofitFactory.getInstance().getuserInfo(UserInfoConfig.getUserId())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new BaseCosumer<UserInfo>() {

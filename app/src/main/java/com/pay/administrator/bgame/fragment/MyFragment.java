@@ -1,10 +1,7 @@
 package com.pay.administrator.bgame.fragment;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -14,17 +11,16 @@ import com.pay.administrator.bgame.activity.FeedbackActivity;
 import com.pay.administrator.bgame.activity.MylikeActivity;
 import com.pay.administrator.bgame.activity.NoticeListActivity;
 import com.pay.administrator.bgame.activity.SettingActivity;
+import com.pay.administrator.bgame.activity.VipActivity;
 import com.pay.administrator.bgame.base.BaseFragment;
-import com.pay.administrator.bgame.bean.BaseBean;
+import com.pay.administrator.bgame.base.UserInfoConfig;
 import com.pay.administrator.bgame.bean.UserInfo;
 import com.pay.administrator.bgame.http.BaseCosumer;
 import com.pay.administrator.bgame.http.RetrofitFactory;
 import com.pay.administrator.bgame.utils.ResultUtils;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -118,6 +114,7 @@ public class MyFragment extends BaseFragment {
                 startActivity(new Intent(getActivity(), MylikeActivity.class));
                 break;
             case R.id.rl_vip:
+                startActivity(new Intent(getActivity(), VipActivity.class));
                 break;
             case R.id.rl_invite:
                 break;
@@ -131,7 +128,7 @@ public class MyFragment extends BaseFragment {
     }
 
     public void getUserInfo() {
-        RetrofitFactory.getInstance().getuserInfo(22)
+        RetrofitFactory.getInstance().getuserInfo(UserInfoConfig.getUserId())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new BaseCosumer<UserInfo>() {

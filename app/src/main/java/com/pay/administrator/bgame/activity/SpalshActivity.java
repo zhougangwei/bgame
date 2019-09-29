@@ -32,9 +32,6 @@ public class SpalshActivity extends BaseActivity{
     @SuppressLint("CheckResult")
     @Override
     protected void initView() {
-
-
-
         Observable.timer(1, TimeUnit.SECONDS)
                 .observeOn(Schedulers.io())
                 .subscribe(new Consumer<Long>() {
@@ -45,8 +42,10 @@ public class SpalshActivity extends BaseActivity{
                         }else {
                             startActivity(new Intent(SpalshActivity.this,MainActivity.class));
                         }
-
+                        finish();
                     }
                 });
+
+
     }
 }

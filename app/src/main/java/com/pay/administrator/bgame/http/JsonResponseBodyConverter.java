@@ -32,6 +32,7 @@ public class JsonResponseBodyConverter<T> implements Converter<ResponseBody, T> 
             String data = value.string();
             JSONObject jsonObject = new JSONObject(data);
             //需要重新登录
+            LogUtils.w("JsonResponseBodyConverter",data);
             String code = jsonObject.get("code").toString();
             if ((Contact.REPONSE_CODE_ERROR_USER+"").equals(code)){
                 App.goLogin();

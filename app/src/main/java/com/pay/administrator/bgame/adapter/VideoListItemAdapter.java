@@ -17,10 +17,9 @@ import java.util.List;
  * Created by kiddo on 2018/1/9.
  */
 
-public class SearchAdapter extends BaseQuickAdapter<VideoListBean.DataBean, BaseViewHolder> {
+public class VideoListItemAdapter extends BaseQuickAdapter<VideoListBean.DataBean, BaseViewHolder> {
 
-
-    public SearchAdapter(int layoutIds, List<VideoListBean.DataBean> countryDatas) {
+    public VideoListItemAdapter(int layoutIds, List<VideoListBean.DataBean> countryDatas) {
         super(layoutIds, countryDatas);
     }
 
@@ -41,12 +40,12 @@ public class SearchAdapter extends BaseQuickAdapter<VideoListBean.DataBean, Base
                 content=item.getTitleEn();
                 break;
         }
-
-        helper.setText(R.id.tv_name,content);
+        helper.setText(R.id.tv_content,content);
         helper.setText(R.id.tv_num,item.getPlayCount()+"");
-        ImageView ivBg = (ImageView) helper.getView(R.id.bg);
+        ImageView view = (ImageView) helper.getView(R.id.iv_bg);
         Glide.with(mContext).load(item.getLogo())
-                .apply(RequestOptions.placeholderOf(ivBg.getDrawable())).into(ivBg);
+                .apply(RequestOptions.placeholderOf(view.getDrawable()))
+                .into(view);
 
     }
 }

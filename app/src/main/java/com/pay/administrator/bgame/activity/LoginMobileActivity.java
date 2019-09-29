@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.pay.administrator.bgame.R;
 import com.pay.administrator.bgame.base.BaseActivity;
+import com.pay.administrator.bgame.base.UserInfoConfig;
 import com.pay.administrator.bgame.bean.LoginBean;
 import com.pay.administrator.bgame.http.BaseCosumer;
 import com.pay.administrator.bgame.http.ProxyPostHttpRequest;
@@ -90,6 +91,7 @@ public class LoginMobileActivity extends BaseActivity {
                         if (!ResultUtils.cheekSuccess(baseBean)) {
                             return;
                         }
+                        UserInfoConfig.setUserId(baseBean.getUserid());
                         SPUtil.getInstance().setToken(baseBean.getData());
                         ToastUtils.showToast(LoginMobileActivity.this,"success!");
                         startActivity(new Intent(LoginMobileActivity.this,MainActivity.class));

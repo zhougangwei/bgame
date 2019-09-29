@@ -3,6 +3,7 @@ package com.pay.administrator.bgame.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
@@ -28,18 +29,20 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.ClipPa
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class FeedbackActivity extends BaseActivity {
 
 
     @BindView(R.id.iv_back)
-    ImageView      ivBack;
+    ImageView ivBack;
     @BindView(R.id.tv_title)
-    TextView       tvTitle;
+    TextView tvTitle;
     @BindView(R.id.magic_indicator)
     MagicIndicator magicIndicator;
     @BindView(R.id.vp)
-    ViewPager      vp;
+    ViewPager vp;
     private String[] titles;
 
     @Override
@@ -53,6 +56,7 @@ public class FeedbackActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        tvTitle.setText("Feedback");
         initMagicIndicator3();
     }
 
@@ -103,28 +107,32 @@ public class FeedbackActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        FragmentManager fragmentManager=getSupportFragmentManager();
-        for(int indext=0;indext<fragmentManager.getFragments().size();indext++)
-        {
-            Fragment fragment=fragmentManager.getFragments().get(indext); //找到第一层Fragment
-            if(fragment!=null)
-                handleResult(fragment,requestCode,resultCode,data);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        for (int indext = 0; indext < fragmentManager.getFragments().size(); indext++) {
+            Fragment fragment = fragmentManager.getFragments().get(indext); //找到第一层Fragment
+            if (fragment != null)
+                handleResult(fragment, requestCode, resultCode, data);
         }
 
 
-
     }
-    private void handleResult(Fragment fragment,int requestCode,int resultCode,Intent data)
-    {
+
+    private void handleResult(Fragment fragment, int requestCode, int resultCode, Intent data) {
         fragment.onActivityResult(requestCode, resultCode, data);//调用每个Fragment的onActivityResult
 
         List<Fragment> childFragment = fragment.getChildFragmentManager().getFragments(); //找到第二层Fragment
-        if(childFragment!=null)
-            for(Fragment f:childFragment)
-                if(f!=null)
-                {
+        if (childFragment != null)
+            for (Fragment f : childFragment)
+                if (f != null) {
                     handleResult(f, requestCode, resultCode, data);
                 }
 
+    }
+
+
+
+    @OnClick(R.id.iv_back)
+    public void onViewClicked() {
+        finish();
     }
 }

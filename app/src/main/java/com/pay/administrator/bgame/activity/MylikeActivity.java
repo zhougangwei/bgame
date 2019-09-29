@@ -1,29 +1,24 @@
 package com.pay.administrator.bgame.activity;
 
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.blankj.utilcode.utils.LogUtils;
-import com.blankj.utilcode.utils.SizeUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.pay.administrator.bgame.R;
 import com.pay.administrator.bgame.adapter.LikeAdapter;
-import com.pay.administrator.bgame.adapter.SearchAdapter;
 import com.pay.administrator.bgame.base.BaseActivity;
+import com.pay.administrator.bgame.base.UserInfoConfig;
 import com.pay.administrator.bgame.bean.BaseBean;
-import com.pay.administrator.bgame.base.Contact;
-import com.pay.administrator.bgame.bean.BaseBean;
-import com.pay.administrator.bgame.bean.HomeMovieBean;
 import com.pay.administrator.bgame.bean.LikeBean;
-import com.pay.administrator.bgame.bean.TagBean;
 import com.pay.administrator.bgame.http.BaseCosumer;
+import com.pay.administrator.bgame.http.ProxyPostHttpRequest;
 import com.pay.administrator.bgame.http.RetrofitFactory;
 import com.pay.administrator.bgame.utils.ResultUtils;
+import com.pay.administrator.bgame.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,8 +53,6 @@ public class MylikeActivity extends BaseActivity {
         getData(true);
     }
 
-
-
     private void getData(final boolean isRefresh) {
         if (!isLoadMore) {
             return;
@@ -69,7 +62,7 @@ public class MylikeActivity extends BaseActivity {
         } else {
             page++;
         }
-        RetrofitFactory.getInstance().getLikeVideo(22)
+        RetrofitFactory.getInstance().getLikeVideo(UserInfoConfig.getUserId())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new BaseCosumer<LikeBean>() {
@@ -95,7 +88,6 @@ public class MylikeActivity extends BaseActivity {
                     }
                 });
     }
-
 
     @Override
     protected int getContentViewId() {
@@ -163,10 +155,36 @@ public class MylikeActivity extends BaseActivity {
         }
     }
     private void selectAll() {
-
+        for (int i = 0; i < datas.size(); i++) {
+            LikeBean.DataBean dataBean = datas.get(i);
+            dataBean.setSelectEdit(true);
+        }
+        likeAdapter.notifyDataSetChanged();
     }
     private void deleteSelect() {
-
+        StringBuilder sb =new StringBuilder();
+        for (int i = 0; i < datas.size(); i++) {
+            LikeBean.DataBean dataBean = datas.get(i);
+            if (dataBean.isSelectEdit()){
+                sb.append(dataBean.getMovieId()).append(",");
+            }
+        }
+        if(sb.length()==0){
+            ToastUtils.showToast(this,"Please Choose!");
+            return;
+        }
+        RetrofitFactory.getInstance().deleteLike(ProxyPostHttpRequest.getInstance().deleteLike(
+                UserInfoConfig.getUserId(),sb.toString()
+        )).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new BaseCosumer<BaseBean>() {
+                    @Override
+                    public void onGetData(BaseBean baseBean) {
+                        if (ResultUtils.cheekSuccess(baseBean)) {
+                            ToastUtils.showToast(MylikeActivity.this,"Delete Success!");
+                        }
+                    }
+                });
     }
     private void selectEdit() {
         edit = !edit;

@@ -1,7 +1,5 @@
 package com.pay.administrator.bgame.bean;
 
-import android.nfc.Tag;
-
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.google.gson.annotations.SerializedName;
 
@@ -31,7 +29,7 @@ public class HomeMovieBean extends BaseBean {
         @SerializedName("type")
         private TypeBean type;
         @SerializedName("recommendMovie")
-        private List<TagBean.DataBean> recommendMovie;
+        private List<VideoListBean.DataBean> recommendMovie;
 
         private int dataType;
 
@@ -51,11 +49,11 @@ public class HomeMovieBean extends BaseBean {
             this.type = type;
         }
 
-        public List<TagBean.DataBean> getRecommendMovie() {
+        public List<VideoListBean.DataBean> getRecommendMovie() {
             return recommendMovie;
         }
 
-        public void setRecommendMovie(List<TagBean.DataBean> recommendMovie) {
+        public void setRecommendMovie(List<VideoListBean.DataBean> recommendMovie) {
             this.recommendMovie = recommendMovie;
         }
 
