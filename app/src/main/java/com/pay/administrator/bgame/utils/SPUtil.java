@@ -131,4 +131,12 @@ public class SPUtil {
     public void setFirstTime() {
          setBoolean("firsttime",true);
     }
+
+    public String getSearchHis() {
+        return getString("searchhis");
+    }
+    public void setSearchHis(String searchhis) {
+
+         setString("searchhis",getSearchHis()+searchhis+",,");
+    }
 }

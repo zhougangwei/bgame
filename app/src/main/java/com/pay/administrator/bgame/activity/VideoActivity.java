@@ -33,9 +33,11 @@ import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.pay.administrator.bgame.R;
 import com.pay.administrator.bgame.base.BaseActivity;
 import com.pay.administrator.bgame.base.Contact;
+import com.pay.administrator.bgame.base.UserInfoConfig;
 import com.pay.administrator.bgame.bean.BaseBean;
 import com.pay.administrator.bgame.bean.VideoBean;
 import com.pay.administrator.bgame.http.BaseCosumer;
+import com.pay.administrator.bgame.http.ProxyPostHttpRequest;
 import com.pay.administrator.bgame.http.RetrofitFactory;
 import com.pay.administrator.bgame.utils.CacheDataSourceFactory;
 import com.pay.administrator.bgame.utils.GsonUtil;
@@ -95,7 +97,6 @@ public class VideoActivity extends BaseActivity {
                     @Override
                     public void onGetData(VideoBean baseBean) {
                         if (ResultUtils.cheekSuccess(baseBean)) {
-
                             VideoBean.DataBean data = baseBean.getData();
                             mTvLookTimes.setText(data.getPlayCount()+"times");
                             if (data.isLikeFlag()){
@@ -166,11 +167,28 @@ public class VideoActivity extends BaseActivity {
                         Log.e(TAG, "onGetData: "+ GsonUtil.parseObjectToJson(tagbean));
                        
                         if (ResultUtils.cheekSuccess(tagbean)) {
+                             mIvLike.setSelected(true);
                             ToastUtils.showToast(VideoActivity.this,"like success!");
                         }
                     }
                 });
     }
+
+    private void disLike() {
+        RetrofitFactory.getInstance().deleteLike(ProxyPostHttpRequest.getInstance().deleteLike(vid))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new BaseCosumer<BaseBean>() {
+                    @Override
+                    public void onGetData(BaseBean tagbean) {
+                        if (ResultUtils.cheekSuccess(tagbean)) {
+                            mIvLike.setSelected(false);
+                            ToastUtils.showToast(VideoActivity.this,"dislike success!");
+                        }
+                    }
+                });
+    }
+
 
     private void addShare() {
         RetrofitFactory.getInstance().addShare(vid)
@@ -239,7 +257,11 @@ public class VideoActivity extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_like:
-                addLike();
+                if(mIvLike.isSelected()){
+                    disLike();
+                }else{
+                    addLike();
+                }
                 break;
             case R.id.iv_report:
                 ToastUtils.showToast(this,"Report success!");

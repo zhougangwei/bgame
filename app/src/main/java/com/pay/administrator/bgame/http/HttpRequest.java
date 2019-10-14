@@ -78,7 +78,7 @@ public interface HttpRequest {
     Observable<BaseBean> appInstall();
 
     @GET("/namol/api/app/v1/userInfo")
-    Observable<UserInfo> getuserInfo(@Query("user_id")int userid);
+    Observable<UserInfo> getuserInfo();
 
     @GET("/namol/api/app/v1/noticeList")
     Observable<NoticeBean> getNoticeList(@Query("pageNum") int page, @Query("user_id")int user_id);
@@ -96,7 +96,7 @@ public interface HttpRequest {
     Observable<PicBean> uploadPic(
             @Part MultipartBody.Part... files);
     @GET("/namol/api/app/v1/feedBackList")
-    Observable<VideoListBean> getFeedbackList(@Query("user_id")int userId, @Query("pageNum")int pageNum);
+    Observable<VideoListBean> getFeedbackList(@Query("pageNum")int pageNum);
 
     @GET("/namol/api/app/v1/perActive")
     Observable<BaseBean> active();
@@ -106,6 +106,24 @@ public interface HttpRequest {
 
     @POST("/namol/api/app/v1/delCollect")
     Observable<BaseBean> deleteLike(@Body RequestBody requestBody);
-    RequestBody deleteLike(@Query("user_id")int userId, @Query("collect_ids")String collect_ids
+    RequestBody deleteLike( @Query("collect_ids")String collect_ids
     );
+
+    @POST("/namol/api/app/v1/uploadPhoto")
+    Observable<BaseBean> changeHeadUrl(@Body RequestBody requestBody);
+    RequestBody changeHeadUrl(@Query("user_id")int userId, @Query("url")String url
+    );
+
+    @POST("/namol/api/app/v1/updateTel")
+    Observable<BaseBean> updateTel(@Body RequestBody requestBody);
+    RequestBody updateTel(@Query("new_telephone")int new_telephone, @Query("msg_code")String msg_code
+    );
+
+
+    @POST("/namol/api/app/v1/resetPwd")
+    Observable<BaseBean> resetPwd(@Body RequestBody requestBody);
+    RequestBody resetPwd(@Query("telephone")String telephone, @Query("new_telephone")String new_telephone,@Query("msg_code")String msg_code
+    );
+
+
 }

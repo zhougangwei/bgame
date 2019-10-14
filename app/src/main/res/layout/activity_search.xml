@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                              xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             xmlns:tools="http://schemas.android.com/tools"
                                              android:layout_width="match_parent"
                                              android:layout_height="match_parent"
                                              android:background="@color/black">
@@ -14,8 +15,6 @@
     </ImageView>
 
     <EditText
-        android:maxLines="1"
-        android:imeOptions="actionSearch"
         android:id="@+id/et_search"
         android:layout_width="0dp"
         android:layout_height="28dp"
@@ -26,9 +25,11 @@
         android:drawablePadding="8dp"
         android:drawableStart="@drawable/icon_input_search"
         android:gravity="center_vertical"
-        android:singleLine="true"
         android:hint="Please enter a keyword to find the source"
+        android:imeOptions="actionSearch"
+        android:maxLines="1"
         android:paddingStart="6dp"
+        android:singleLine="true"
         android:textColorHint="#FFC937"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView5"
@@ -49,8 +50,40 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/et_search"/>
 
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="23dp"
+        android:text="Search record"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/rv"/>
+
+    <ImageView
+        android:id="@+id/iv_his_del"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:padding="12dp"
+        android:src="@drawable/btn_del"
+        app:layout_constraintBottom_toBottomOf="@+id/textView16"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView16"/>
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_his"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_his_del"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_marginTop="10dp"
         android:id="@+id/rv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -59,5 +92,38 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView5"/>
 
+    <android.support.constraint.Group
+        android:id="@+id/gp_his_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="rv_his,iv_his_del,textView16"
+        />
+
+    <ImageView
+        android:id="@+id/iv_his_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="110dp"
+        android:src="@drawable/pic_empty_his"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/rv"/>
+
+    <TextView
+        android:id="@+id/tv_no_his"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="45dp"
+        android:text="No search history"
+        android:textColor="#888888"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_his_empty"/>
 
 </android.support.constraint.ConstraintLayout>

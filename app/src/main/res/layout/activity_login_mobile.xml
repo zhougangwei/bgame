@@ -43,7 +43,7 @@
         android:background="@drawable/bg_login_input"
         android:ems="10"
         android:hint="Please enter Password"
-        android:inputType="phone"
+        android:inputType="numberPassword"
         android:paddingEnd="21dp"
         android:paddingStart="21dp"
         android:textColor="@color/white"

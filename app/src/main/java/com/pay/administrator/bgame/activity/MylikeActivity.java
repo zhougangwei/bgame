@@ -174,7 +174,7 @@ public class MylikeActivity extends BaseActivity {
             return;
         }
         RetrofitFactory.getInstance().deleteLike(ProxyPostHttpRequest.getInstance().deleteLike(
-                UserInfoConfig.getUserId(),sb.toString()
+                sb.toString()
         )).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new BaseCosumer<BaseBean>() {

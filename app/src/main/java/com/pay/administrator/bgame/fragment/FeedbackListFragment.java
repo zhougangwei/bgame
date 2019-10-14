@@ -93,7 +93,7 @@ public class FeedbackListFragment extends BaseFragment {
         } else {
             page++;
         }
-        RetrofitFactory.getInstance().getFeedbackList(UserInfoConfig.getUserId(),page)
+        RetrofitFactory.getInstance().getFeedbackList(page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new BaseCosumer<VideoListBean>() {

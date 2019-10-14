@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="#222222"
+    android:layout_height="match_parent">
+<android.support.constraint.ConstraintLayout
     android:layout_width="match_parent"
     android:background="#222222"
     android:layout_height="match_parent">
@@ -158,25 +162,14 @@
         android:id="@+id/textView20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="VIP original price $19,99 per month"
+        android:text="VIP original price $19,99 per month\nInvite friends,spend $4,99 to become\nthe Vip of the month\nInvite 5 friends to get the VIP \nfor the month for free"
         android:textColor="@color/white"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="@+id/tv_forever"
         app:layout_constraintStart_toStartOf="@+id/tv_forever"
         tools:layout_editor_absoluteY="399dp" />
 
-    <TextView
-        android:id="@+id/textView21"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="VIP original price $19,99 per month"
-        android:textColor="@color/white"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="@+id/tv_forever"
-        app:layout_constraintHorizontal_bias="0.913"
-        app:layout_constraintStart_toStartOf="@+id/tv_forever"
-        app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
 
     <TextView
         android:id="@+id/textView23"
@@ -191,7 +184,7 @@
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView22" />
+        app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
     <ImageView
         android:id="@+id/imageView16"
@@ -210,9 +203,11 @@
         android:layout_marginStart="8dp"
         android:text="The final interpretation of the event belongs to Umer"
         android:textColor="#888888"
+        android:layout_marginBottom="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView16" />
 
 
 </android.support.constraint.ConstraintLayout>
+</ScrollView>

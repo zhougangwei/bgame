@@ -3,10 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="80dp"
+                                             android:layout_marginTop="10dp"
     android:background="#FF262626">
 
     <ImageView
-        android:id="@+id/iv_bg"
+        android:id="@+id/bg"
         android:layout_width="125dp"
         android:layout_height="match_parent"
         android:layout_marginStart="15dp"
@@ -26,7 +27,7 @@
         android:textColor="#FFFFFFFF"
         android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/tv_num"
-        app:layout_constraintStart_toEndOf="@+id/iv_head"
+        app:layout_constraintStart_toEndOf="@+id/bg"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView

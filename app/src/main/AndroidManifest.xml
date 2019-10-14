@@ -27,13 +27,14 @@
         <activity android:name=".activity.MainActivity">
         </activity>
         <activity android:name=".activity.MylikeActivity"/>
-        <activity android:name=".activity.LoginActivity"
-            android:launchMode="singleTask"
-            />
+        <activity
+            android:name=".activity.LoginActivity"
+            android:launchMode="singleTask"/>
         <activity android:name=".activity.LoginMobileActivity"/>
         <activity android:name=".activity.SpalshActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
@@ -46,13 +47,16 @@
         </activity>
         <activity android:name=".activity.EnterInviActivity"/>
         <activity android:name=".activity.ChooseCountryActivity"/>
-        <activity android:name=".activity.NoticeListActivity" />
+        <activity android:name=".activity.NoticeListActivity"/>
         <activity android:name=".activity.LoginSmsActivity"/>
         <activity android:name=".activity.NoticeListActivity"/>
-        <activity android:name=".activity.FeedbackActivity" />
-        <activity android:name=".activity.VideoListActivity" />
-        <activity android:name=".activity.NoticeDetailActivity" />
+        <activity android:name=".activity.FeedbackActivity"/>
+        <activity android:name=".activity.VideoListActivity"/>
+        <activity android:name=".activity.NoticeDetailActivity"/>
         <activity android:name=".activity.ActivityChangePswActivity"/>
+        <activity android:name=".activity.ResetUserinfoActivity">
+        </activity>
+        <activity android:name=".activity.InviteVipActivity"/>
     </application>
 
 </manifest>

@@ -57,7 +57,7 @@ public class VipActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-
+        tvTitle.setText("Open VIP");
     }
 
 
