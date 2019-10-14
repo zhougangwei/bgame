@@ -8,9 +8,6 @@ import android.view.ViewGroup;
 
 import com.pay.administrator.bgame.fragment.FeedbackFragment;
 import com.pay.administrator.bgame.fragment.FeedbackListFragment;
-import com.pay.administrator.bgame.fragment.HomeFragment;
-import com.pay.administrator.bgame.fragment.MyFragment;
-import com.pay.administrator.bgame.fragment.SearchFragment;
 
 import java.util.ArrayList;
 

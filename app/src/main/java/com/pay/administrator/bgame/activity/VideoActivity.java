@@ -31,6 +31,7 @@ import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
 import com.google.android.exoplayer2.upstream.BandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.pay.administrator.bgame.R;
+import com.pay.administrator.bgame.adapter.GlideImageLoader;
 import com.pay.administrator.bgame.base.BaseActivity;
 import com.pay.administrator.bgame.base.Contact;
 import com.pay.administrator.bgame.base.UserInfoConfig;
@@ -44,6 +45,12 @@ import com.pay.administrator.bgame.utils.GsonUtil;
 import com.pay.administrator.bgame.utils.ResultUtils;
 import com.pay.administrator.bgame.utils.ToastUtils;
 import com.pay.administrator.bgame.utils.ToolUtils;
+import com.pay.administrator.bgame.wight.banner.Banner;
+import com.pay.administrator.bgame.wight.banner.BannerConfig;
+import com.pay.administrator.bgame.wight.banner.listener.OnBannerListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -76,11 +83,15 @@ public class VideoActivity extends BaseActivity {
     TextView            mTextView11;
     @BindView(R.id.textView13)
     TextView            mTextView13;
+    @BindView(R.id.banner)
+    Banner banner;
 
     private String               vid;
     private SimpleExoPlayer      exoPlayer;
     private ExtractorMediaSource videoSource;
     private LoopingMediaSource   curVideoSource;
+
+    private List<String> imagesList = new ArrayList<>();
 
     public static void startVideo(Context context, int vid) {
         Intent intent = new Intent(context, VideoActivity.class);
@@ -126,6 +137,28 @@ public class VideoActivity extends BaseActivity {
                         }
                     }
                 });
+        getBannerData();
+    }
+
+    private void banner() {
+        banner.setImages(imagesList)
+                .setImageLoader(new GlideImageLoader())
+                .setOnBannerListener(new OnBannerListener() {
+                    @Override
+                    public void OnBannerClick(int position) {
+                    }
+                })
+                .start();
+        banner.setIndicatorGravity(BannerConfig.RIGHT);
+    }
+
+    private void getBannerData() {
+        imagesList.clear();
+        imagesList.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1561969870482&di=5c1c1ce287af862e3165902039c59cbd&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20160522%2F29bb43e8e4d44c94846ae13520d15f88_th.jpg");
+        imagesList.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1561969870482&di=5c1c1ce287af862e3165902039c59cbd&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20160522%2F29bb43e8e4d44c94846ae13520d15f88_th.jpg");
+        imagesList.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1561969870482&di=5c1c1ce287af862e3165902039c59cbd&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20160522%2F29bb43e8e4d44c94846ae13520d15f88_th.jpg");
+        imagesList.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1561969870482&di=5c1c1ce287af862e3165902039c59cbd&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20160522%2F29bb43e8e4d44c94846ae13520d15f88_th.jpg");
+        banner();
     }
 
     private void getMediaSource(String url) {

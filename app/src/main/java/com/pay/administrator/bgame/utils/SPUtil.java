@@ -136,7 +136,10 @@ public class SPUtil {
         return getString("searchhis");
     }
     public void setSearchHis(String searchhis) {
-
          setString("searchhis",getSearchHis()+searchhis+",,");
     }
+    public void clearSearchHis() {
+        setString("searchhis","");
+    }
+
 }

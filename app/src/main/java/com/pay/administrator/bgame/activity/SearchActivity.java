@@ -1,6 +1,7 @@
 package com.pay.administrator.bgame.activity;
 
 
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.constraint.Group;
 import android.support.v7.widget.GridLayoutManager;
@@ -15,6 +16,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.blankj.utilcode.utils.LogUtils;
+import com.blankj.utilcode.utils.ScreenUtils;
+import com.blankj.utilcode.utils.SizeUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.pay.administrator.bgame.R;
 import com.pay.administrator.bgame.adapter.FeedBackTypeAdapter;
@@ -71,7 +74,7 @@ public class SearchActivity extends BaseActivity {
 
     private List<String> hisList = new ArrayList<>();
     private SearchHisAdapter mHisAdapter;
-
+    private Paint mPaint;
 
     @Override
     protected void initData() {
@@ -88,6 +91,9 @@ public class SearchActivity extends BaseActivity {
                 }
             }
             if (hisList.size()!=0){
+                mGpHisResult.setVisibility(View.VISIBLE);
+                mIvHisEmpty.setVisibility(View.GONE);
+                mTvNoHis.setVisibility(View.GONE);
                 mHisAdapter.notifyDataSetChanged();
             }else{
                 mGpHisResult.setVisibility(View.GONE);
@@ -105,13 +111,14 @@ public class SearchActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-
-
+        mPaint = new Paint();
+        mPaint.setAntiAlias(true);
+        mPaint.setTextSize(SizeUtils.sp2px(SearchActivity.this, 14));
+        mPaint.setStyle(Paint.Style.FILL);
         searchAdapter = new SearchAdapter(R.layout.item_search_video, dataList);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRv.setLayoutManager(layoutManager);
         mRv.setAdapter(searchAdapter);
-
         searchAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
             @Override
             public void onLoadMoreRequested() {
@@ -141,12 +148,20 @@ public class SearchActivity extends BaseActivity {
             }
         });
 
-
-
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 100);
         mRvHis.setLayoutManager(gridLayoutManager);
         mHisAdapter = new SearchHisAdapter(R.layout.item_feedback_type, hisList);
         mRvHis.setAdapter(mHisAdapter);
+        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                int width = ScreenUtils.getScreenWidth(SearchActivity.this) - SizeUtils.dp2px(SearchActivity.this, 44);
+                int itemWidth = getTextWidth(mPaint, hisList.get(position)) + SizeUtils.dp2px(SearchActivity.this, 34);
+                return Math.min(100, itemWidth * 100 / width + 1);
+            }
+        });
+
+
         mHisAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
@@ -157,13 +172,20 @@ public class SearchActivity extends BaseActivity {
                 mHisAdapter.notifyDataSetChanged();
             }
         });
-
-
-
-
-
     }
 
+    private int getTextWidth(Paint paint, String str) {
+        int iRet = 0;
+        if (str != null && str.length() > 0) {
+            int len = str.length();
+            float[] widths = new float[len];
+            paint.getTextWidths(str, widths);
+            for (int j = 0; j < len; j++) {
+                iRet += (int) Math.ceil(widths[j]);
+            }
+        }
+        return iRet;
+    }
     public void hideSoftInput() {
         // 先隐藏键盘
         ((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE))
@@ -171,10 +193,20 @@ public class SearchActivity extends BaseActivity {
                         .getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
     }
 
-    @OnClick(R.id.tv_cancel)
-    public void onClick() {
-        content = "";
-        getData(true);
+    @OnClick({R.id.tv_cancel,R.id.iv_his_del})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.tv_cancel:
+                content = "";mEtSearch.setText("");
+                getData(true);
+                break;
+            case R.id.iv_his_del:
+                SPUtil.getInstance().clearSearchHis();
+                break;
+
+        }
+
+
     }
 
 
@@ -217,11 +249,4 @@ public class SearchActivity extends BaseActivity {
                 });
     }
 
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 }

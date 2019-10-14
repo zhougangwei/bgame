@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.pay.administrator.bgame.R;
 import com.pay.administrator.bgame.base.BaseActivity;
+import com.pay.administrator.bgame.pay.GooglePayUi;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -45,6 +46,11 @@ public class VipActivity extends BaseActivity {
     @BindView(R.id.textView15)
     TextView textView15;
 
+    public static final int PAY_MONTH = 1;
+    public static final int PAY_FOREVER = 2;
+    private GooglePayUi googlePayUi;
+
+
     @Override
     protected void initData() {
 
@@ -58,6 +64,8 @@ public class VipActivity extends BaseActivity {
     @Override
     protected void initView() {
         tvTitle.setText("Open VIP");
+        googlePayUi = new GooglePayUi();
+        googlePayUi.init(this);
     }
 
 
@@ -68,10 +76,31 @@ public class VipActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.tv_month:
-
+                gotoCharge(PAY_MONTH);
                 break;
             case R.id.tv_forever:
+                gotoCharge(PAY_FOREVER);
                 break;
         }
     }
+
+    private void gotoCharge(int type) {
+        switch (type) {
+            case PAY_MONTH:
+                googlePayUi.charge(GooglePayUi.NAMOL_199);
+                break;
+            case PAY_FOREVER:
+                googlePayUi.charge(GooglePayUi.NAMOL_1999);
+                break;
+        }
+
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        googlePayUi.onDestroy();
+    }
+
 }

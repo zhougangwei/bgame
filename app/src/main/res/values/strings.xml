@@ -16,4 +16,8 @@
     <string name="next">next</string>
     <string name="congfirm">Congfirm</string>
     <string name="feedback">Feedback</string>
+    <string name="googlepaycode">MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAimuJ6Fa/ZojG+PwzBdFSgtYhdLgIfh4J6UVScKyAia9OwqmC0sCzwVNda3KtckvuzMHiBVGvvJIPhZQR7Cslr4TdcAteX+CrjDFaDyJICTMh7GBBIUlcREeT10eTmNsx6aTbT3aSyxsAtZv2hc4jHMNFhhOMZwEoGs/XtEdHM5dICU7de3avHlR8E3v98iVZvk32pMhR1yqLs9Fiej4mWRyHv8n0Tm+lS/IOUhDOHj27XG/7qTUggAUIJk8oC2gqvioBnHXo44N3saWBj/FMFHai+lpKHynTelD2ebqYiQkAP2eC2ZPqmYCt4L+DMtHXxvGPMaAHy/LF0CAp9v5Q4wIDAQAB</string>
+    <string name="google_pay_net_fail">NetWork Wrong!</string>
+    <string name="charge_success">Charge Success</string>
+    <string name="charge_fail">Charge Fail</string>
 </resources>

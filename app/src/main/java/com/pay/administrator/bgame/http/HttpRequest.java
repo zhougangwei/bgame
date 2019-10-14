@@ -6,6 +6,7 @@ import com.pay.administrator.bgame.bean.HomeMovieBean;
 import com.pay.administrator.bgame.bean.LikeBean;
 import com.pay.administrator.bgame.bean.LoginBean;
 import com.pay.administrator.bgame.bean.NoticeBean;
+import com.pay.administrator.bgame.bean.OrderBean;
 import com.pay.administrator.bgame.bean.PicBean;
 import com.pay.administrator.bgame.bean.TagBean;
 import com.pay.administrator.bgame.bean.VideoListBean;
@@ -126,4 +127,15 @@ public interface HttpRequest {
     );
 
 
+    @POST("/namol/api/app/v1/googlePay")
+    Observable<BaseBean> googleUpdateProduct(@Body RequestBody requestBody);
+    RequestBody googleUpdateProduct( @Query("purchase_token")String purchase_token,@Query("product_id") String product_id, @Query("order_no")String order_no);
+
+
+
+
+    @POST("/namol/api/app/v1/addOrder")
+    Observable<OrderBean> addProduct(@Body RequestBody requestBody);
+    RequestBody addProduct(@Query("product_id")String product_id
+    );
 }
