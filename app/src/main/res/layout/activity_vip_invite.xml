@@ -140,7 +140,7 @@
 
 
     <TextView
-        android:id="@+id/tv_forever"
+        android:id="@+id/tv_invite"
         android:layout_width="wrap_content"
         android:layout_height="44dp"
         android:layout_marginStart="8dp"
@@ -165,9 +165,11 @@
         android:text="VIP original price $19,99 per month\nInvite friends,spend $4,99 to become\nthe Vip of the month\nInvite 5 friends to get the VIP \nfor the month for free"
         android:textColor="@color/white"
         android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="@+id/tv_forever"
-        app:layout_constraintStart_toStartOf="@+id/tv_forever"
-        tools:layout_editor_absoluteY="399dp" />
+        android:layout_marginTop="36dp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_invite"
+        app:layout_constraintEnd_toEndOf="@+id/tv_invite"
+        app:layout_constraintStart_toStartOf="@+id/tv_invite"
+         />
 
 
 

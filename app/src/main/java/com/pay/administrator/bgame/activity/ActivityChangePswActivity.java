@@ -40,6 +40,8 @@ public class ActivityChangePswActivity extends BaseActivity {
     EditText     mEtNew;
     @BindView(R.id.ll2)
     LinearLayout mLl2;
+    @BindView(R.id.submit)
+    TextView submit;
     private String code;
     @Override
     protected void initData() {
@@ -51,6 +53,8 @@ public class ActivityChangePswActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        submit.setText("Confirm");
+        mTvTitle.setText("Change Password");
          code = getIntent().getStringExtra("code");
     }
 

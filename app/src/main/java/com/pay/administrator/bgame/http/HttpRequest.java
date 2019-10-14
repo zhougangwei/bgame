@@ -117,7 +117,7 @@ public interface HttpRequest {
 
     @POST("/namol/api/app/v1/updateTel")
     Observable<BaseBean> updateTel(@Body RequestBody requestBody);
-    RequestBody updateTel(@Query("new_telephone")int new_telephone, @Query("msg_code")String msg_code
+    RequestBody updateTel(@Query("new_telephone")String new_telephone, @Query("msg_code")String msg_code
     );
 
 

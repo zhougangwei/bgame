@@ -53,6 +53,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:orientation="horizontal"
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -67,25 +68,39 @@
             android:paddingTop="20dp"
             android:text="Verification Code"
             android:textColor="@color/white"
-            android:textSize="12sp"/>
-
-
-
+            android:textSize="16sp"/>
         <EditText
-            android:id="@+id/et_new_sure"
-            android:layout_width="match_parent"
+            android:id="@+id/et_code"
+            android:layout_marginEnd="6dp"
+            android:layout_width="wrap_content"
+            android:gravity="end|center_vertical"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="1"
             android:background="@null"
             android:ems="10"
-            android:gravity="end|center_vertical"
-            android:hint="New password again"
+            android:hint="Enter the Code"
             android:inputType="textPassword"
             android:textAlignment="textEnd"
             android:textColor="@color/white"
             android:textColorHint="#888888"
             android:textSize="14sp"
+            />
+
+        <TextView
+            android:layout_marginEnd="17dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:id="@+id/tv_get_vcode"
+            android:layout_width="wrap_content"
+            android:layout_height="29dp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:background="@drawable/bg_get_vcode"
+            android:text="Click to get"
+            android:textColor="@color/black"
+            android:textColorHint="#888888"
+            android:textSize="12sp"
             />
 
     </LinearLayout>
@@ -109,6 +124,7 @@
 
 
         <EditText
+            android:layout_marginEnd="26dp"
             android:layout_width="match_parent"
             android:gravity="end|center_vertical"
             android:layout_weight="1"
@@ -127,18 +143,6 @@
 
     </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="18dp"
-        android:padding="10dp"
-        android:text="Forget password ?"
-        android:textColor="#888888"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"/>
 
 
     <include
