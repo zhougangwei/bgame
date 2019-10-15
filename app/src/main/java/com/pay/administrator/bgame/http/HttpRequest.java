@@ -123,8 +123,14 @@ public interface HttpRequest {
 
     @POST("/namol/api/app/v1/resetPwd")
     Observable<BaseBean> resetPwd(@Body RequestBody requestBody);
-    RequestBody resetPwd(@Query("telephone")String telephone, @Query("new_telephone")String new_telephone,@Query("msg_code")String msg_code
+    RequestBody resetPwd(@Query("telephone")String telephone, @Query("new_password")String new_password,@Query("msg_code")String msg_code
     );
+
+    @POST("/namol/api/app/v1/updatePassword")
+    Observable<BaseBean> updatePassword(@Body RequestBody requestBody);
+    RequestBody updatePassword(@Query("old_password")String old_password, @Query("new_password")String new_password
+    );
+
 
 
     @POST("/namol/api/app/v1/googlePay")

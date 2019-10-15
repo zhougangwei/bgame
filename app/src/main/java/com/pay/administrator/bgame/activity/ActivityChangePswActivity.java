@@ -1,5 +1,6 @@
 package com.pay.administrator.bgame.activity;
 
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -43,6 +44,9 @@ public class ActivityChangePswActivity extends BaseActivity {
     @BindView(R.id.submit)
     TextView submit;
     private String code;
+    private boolean mHide;
+    private String telephone;
+
     @Override
     protected void initData() {
     }
@@ -53,9 +57,15 @@ public class ActivityChangePswActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        Intent intent = getIntent();
+        mHide = intent.getBooleanExtra("hide", false);
+        telephone = intent.getStringExtra("telephone");
+        code = intent.getStringExtra("code");
+        if(!TextUtils.isEmpty(telephone)){
+            mLl1.setVisibility(View.GONE);
+        }
         submit.setText("Confirm");
         mTvTitle.setText("Change Password");
-         code = getIntent().getStringExtra("code");
     }
 
     @OnClick({R.id.iv_back, R.id.submit})
@@ -65,24 +75,26 @@ public class ActivityChangePswActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.submit:
-                gotoChange();
-                break;
+                if(mHide){
+                    gotoReset();
+                }else{
+                    gotoChange();
+                }
         }
     }
 
-    private void gotoChange() {
-        String oldpsw = mEtOld.getText().toString();
+    private void gotoReset() {
         String newpsw = mEtNew.getText().toString();
         String newpswsure = mEtNewSure.getText().toString();
-        if(android.text.TextUtils.isEmpty(oldpsw)||android.text.TextUtils.isEmpty(newpsw)||android.text.TextUtils.isEmpty(newpswsure)){
+        if(android.text.TextUtils.isEmpty(newpsw)||android.text.TextUtils.isEmpty(newpswsure)){
             ToastUtils.showToast(this,"Password can't be null!");
             return;
         }
-        if(newpsw.equals(newpswsure)){
+        if(!newpsw.equals(newpswsure)){
             ToastUtils.showToast(this,"Please enter the same new passwords!");
             return;
         }
-        RetrofitFactory.getInstance().resetPwd(ProxyPostHttpRequest.getInstance().resetPwd(oldpsw,newpsw, code))
+        RetrofitFactory.getInstance().resetPwd(ProxyPostHttpRequest.getInstance().resetPwd(telephone,newpsw, code))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new BaseCosumer<BaseBean>() {
@@ -92,5 +104,31 @@ public class ActivityChangePswActivity extends BaseActivity {
                         }
                     }
                 });
+    }
+
+    private void gotoChange() {
+
+        String oldpsw = mEtOld.getText().toString();
+        String newpsw = mEtNew.getText().toString();
+        String newpswsure = mEtNewSure.getText().toString();
+        if(android.text.TextUtils.isEmpty(oldpsw)||android.text.TextUtils.isEmpty(newpsw)||android.text.TextUtils.isEmpty(newpswsure)){
+            ToastUtils.showToast(this,"Password can't be null!");
+            return;
+        }
+        if(!newpsw.equals(newpswsure)){
+            ToastUtils.showToast(this,"Please enter the same new passwords!");
+            return;
+        }
+        RetrofitFactory.getInstance().updatePassword(ProxyPostHttpRequest.getInstance().updatePassword(oldpsw,newpsw))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new BaseCosumer<BaseBean>() {
+                    @Override
+                    public void onGetData(BaseBean tagbean) {
+                        if (ResultUtils.cheekSuccess(tagbean)) {
+                        }
+                    }
+                });
+
     }
 }

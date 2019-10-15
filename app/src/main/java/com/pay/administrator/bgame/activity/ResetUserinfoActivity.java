@@ -29,8 +29,8 @@ import io.reactivex.schedulers.Schedulers;
 public class ResetUserinfoActivity extends BaseActivity {
 
     int type;
-    public static int CHANGE_PSW  = 1;
-    public static int CHANGE_HEAD = 2;
+    public static final int CHANGE_PSW  = 1;
+    public static final int CHANGE_MOBILE = 2;
     @BindView(R.id.iv_back)
     ImageView    mIvBack;
     @BindView(R.id.tv_title)
@@ -70,7 +70,16 @@ public class ResetUserinfoActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        submit.setText("Confirm");
+         type = getIntent().getIntExtra("type",CHANGE_MOBILE);
+        switch (type) {
+            case CHANGE_PSW:
+                submit.setText("Continue");
+                break;
+            case CHANGE_MOBILE:
+                submit.setText("Confirm");
+                break;
+        }
+
     }
 
 
@@ -90,19 +99,33 @@ public class ResetUserinfoActivity extends BaseActivity {
     }
 
     private void gotoChange(int type) {
-        String code = etCode.getText().toString();
-        String telephone=mEtMobile.getText().toString();
-        RetrofitFactory.getInstance().updateTel(ProxyPostHttpRequest.getInstance().updateTel(telephone,code))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseCosumer<BaseBean>() {
-                    @Override
-                    public void onGetData(BaseBean baseCosumer) {
-                        if (ResultUtils.cheekSuccess(baseCosumer)) {
-                            ToastUtils.showToast(ResetUserinfoActivity.this,"Send Success!");
-                        }
-                    }
-                });
+        switch (type) {
+            case CHANGE_PSW:
+                String code1 = etCode.getText().toString();
+                String telephone1=mEtMobile.getText().toString();
+                Intent intent = new Intent(this, ActivityChangePswActivity.class);
+                intent.putExtra("telephone",telephone1);
+                intent.putExtra("code",code1);
+                startActivity(intent);
+                break;
+            case CHANGE_MOBILE:
+                String code = etCode.getText().toString();
+                String telephone=mEtMobile.getText().toString();
+                RetrofitFactory.getInstance().updateTel(ProxyPostHttpRequest.getInstance().updateTel(telephone,code))
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new BaseCosumer<BaseBean>() {
+                            @Override
+                            public void onGetData(BaseBean baseCosumer) {
+                                if (ResultUtils.cheekSuccess(baseCosumer)) {
+                                    ToastUtils.showToast(ResetUserinfoActivity.this,"Send Success!");
+                                }
+                            }
+                        });
+                break;
+        }
+
+
 
     }
 

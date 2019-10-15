@@ -78,6 +78,7 @@ public class AccountManagementActivity extends BaseActivity {
 
                 break;
             case R.id.ll_mobile:
+                ResetUserinfoActivity.startChangeUserInfoActivity(this,ResetUserinfoActivity.CHANGE_MOBILE);
                 break;
             case R.id.ll_change_psw:
                 startActivity(new Intent(this, ActivityChangePswActivity.class));
