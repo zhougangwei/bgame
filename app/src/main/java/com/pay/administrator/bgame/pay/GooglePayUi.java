@@ -59,9 +59,9 @@ public class GooglePayUi implements IabBroadcastReceiver.IabBroadcastListener ,G
     private DialogCircleProgress dialogCircleProgress;
     private  ConstumCallBack constumCallBack;
 
-    public final static String[] productArr=new String[]{ "Namol4.9",
-                    "Namol19.9",
-                    "Namol199.9"};
+    public final static String[] productArr=new String[]{ "namol4.9",
+                    "namol19.9",
+                    "namol199.9"};
 
     public final static String NAMOL_49="Namol4.9";
     public final static String NAMOL_199="Namol4.9";
