@@ -17,6 +17,7 @@ public class UserRegisterBean {
      * recommender_id :
      * register_device : iphoneX
      * msg_code :
+     * type:
      */
 
     private String country_code;
@@ -26,6 +27,7 @@ public class UserRegisterBean {
     private String recommender_id;
     private String register_device;
     private String msg_code;
+    private String type;
 
     public String getCountry_code() {
         return country_code;
@@ -81,5 +83,13 @@ public class UserRegisterBean {
 
     public void setMsg_code(String msg_code) {
         this.msg_code = msg_code;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

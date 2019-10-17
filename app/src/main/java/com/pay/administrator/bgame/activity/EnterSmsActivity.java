@@ -215,7 +215,7 @@ public class EnterSmsActivity extends BaseActivity {
                     @Override
                     public void onGetData(BaseBean baseBean) {
                         if (ResultUtils.cheekSuccess(baseBean)) {
-                            Intent intent = new Intent(EnterSmsActivity.this, SetPasswordActivity.class);
+                            Intent intent = new Intent(EnterSmsActivity.this, EnterInviActivity.class);
                             intent.putExtra("country", country);
                             intent.putExtra("country_code", country_code);
                             intent.putExtra("telephone", telephone);

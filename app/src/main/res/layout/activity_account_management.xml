@@ -76,7 +76,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginStart="25dp"
             android:layout_weight="1"
-            android:text="@string/nick_name"
+            android:text="@string/nickname"
             android:textColor="#FFFFFF"
             android:textSize="16sp"/>
 
@@ -116,7 +116,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginStart="25dp"
             android:layout_weight="1"
-            android:text="@string/mobile_number"
+            android:text="@string/phone_number"
             android:textColor="#FFFFFF"
             android:textSize="16sp"/>
 
@@ -157,7 +157,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginStart="25dp"
             android:layout_weight="1"
-            android:text="@string/change_password"
+            android:text="@string/modify_password"
             android:textColor="#FFFFFF"
             android:textSize="16sp"/>
 

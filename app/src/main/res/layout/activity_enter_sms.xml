@@ -11,7 +11,7 @@
     <include
         android:id="@+id/include2"
         layout="@layout/include_top_toolbar"
-        android:text="@string/please_enter_mobile_number"/>
+        android:text="@string/please_enter_phone_number"/>
 
     <TextView
         android:id="@+id/tv1"

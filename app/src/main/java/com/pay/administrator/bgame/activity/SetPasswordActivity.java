@@ -74,8 +74,7 @@ public class SetPasswordActivity extends BaseActivity {
         userRegisterBean.setRecommender_id(recommender_id);
         userRegisterBean.setRegister_device(Build.MODEL);
         userRegisterBean.setMsg_code(msg_code);
-
-
+            userRegisterBean.setType("0");//phone0 third1
 
         RetrofitFactory.getInstance().userRegister(ProxyPostHttpRequest.getJsonInstance().userRegister(
                 GsonUtil.parseObjectToJson(userRegisterBean)

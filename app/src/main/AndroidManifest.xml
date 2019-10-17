@@ -58,6 +58,7 @@
         <activity android:name=".activity.ResetUserinfoActivity">
         </activity>
         <activity android:name=".activity.InviteVipActivity"/>
+        <activity android:name=".activity.InviteCodeActivity"/>
     </application>
 
 </manifest>

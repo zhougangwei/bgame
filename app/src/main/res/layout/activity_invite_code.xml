@@ -15,15 +15,13 @@
 
     <TextView
         android:id="@+id/tv1"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="80dp"
-
-        android:layout_marginStart="80dp"
+        android:layout_marginEnd="72dp"
+        android:layout_marginStart="72dp"
         android:layout_marginTop="40dp"
         android:gravity="center"
-        android:text="Please enter the 6-digit invitation code
-        sent to you by your friend."
+        android:text="Please fill in the 6-digit verification code sent to +8613558812356"
         android:textColor="#888888"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -55,6 +53,7 @@
                 android:background="@null"
                 android:gravity="center"
                 android:inputType="number"
+
                 android:maxEms="1"
                 android:maxLength="1"
                 android:textColor="@color/white"
@@ -157,96 +156,25 @@
                 android:background="#666666"/>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginEnd="10dp"
-            android:gravity="center"
-            android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/et_code_5"
-                android:layout_width="40dp"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:gravity="center"
-                android:inputType="number"
-                android:maxEms="1"
-                android:maxLength="1"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:textSize="45sp"
-                android:textStyle="bold"/>
 
-            <View
-                android:layout_width="40dp"
-                android:layout_height="2dp"
-                android:layout_marginTop="8dp"
-                android:background="#666666"/>
-        </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <EditText
-                android:id="@+id/et_code_6"
-                android:layout_width="40dp"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:gravity="center"
-                android:inputType="number"
-                android:maxEms="1"
-                android:maxLength="1"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:textSize="45sp"
-                android:textStyle="bold"/>
-
-            <View
-                android:layout_width="40dp"
-                android:layout_height="2dp"
-                android:layout_marginTop="8dp"
-                android:background="#666666"/>
-        </LinearLayout>
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tv_skip"
-        android:layout_width="150dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="58dp"
-        android:background="@drawable/bg_skip"
-        android:gravity="center"
-        android:text="@string/skip"
-        android:textColor="#FFFFC937"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ll_register_code"
-        app:layout_goneMarginBottom="50dp"
-        tools:showIn="@layout/activity_account_management"/>
 
-    <TextView
-        android:id="@+id/tv_submit"
-        android:layout_width="150dp"
+    <include
+        android:id="@+id/tv_register_code_next"
+        layout="@layout/include_submit"
+        android:layout_width="0dp"
         android:layout_height="44dp"
         android:layout_marginEnd="27dp"
-
-        android:background="@drawable/bg_submit"
-        android:gravity="center"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="60dp"
         android:text="@string/next"
-        android:textColor="@color/black"
-        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv_skip"
-        app:layout_goneMarginBottom="50dp"
-        tools:showIn="@layout/activity_account_management"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll_register_code"/>
 
     <TextView
         android:id="@+id/tv_send_again"
@@ -254,7 +182,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="30dp"
         android:gravity="center_horizontal"
         android:text="If you are not invited by a friend,
 please click the skip button"
@@ -262,7 +190,7 @@ please click the skip button"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_submit"/>
+        app:layout_constraintTop_toBottomOf="@+id/tv_register_code_next"/>
 
 
 </android.support.constraint.ConstraintLayout>
