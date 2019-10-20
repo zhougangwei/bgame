@@ -59,13 +59,15 @@ public class GooglePayUi implements IabBroadcastReceiver.IabBroadcastListener ,G
     private DialogCircleProgress dialogCircleProgress;
     private  ConstumCallBack constumCallBack;
 
-    public final static String[] productArr=new String[]{ "namol4.9",
-                    "namol19.9",
-                    "namol199.9"};
 
-    public final static String NAMOL_49="Namol4.9";
-    public final static String NAMOL_199="Namol4.9";
-    public final static String NAMOL_1999="Namol199.9";
+    public final static String NAMOL_49="namol4.99";
+    public final static String NAMOL_199="namol19.99";
+    public final static String NAMOL_1999="namol199.99";
+
+    public final static String[] productArr=new String[]{ NAMOL_49,
+            NAMOL_199,
+            NAMOL_1999};
+
 
 
     @Override
@@ -106,8 +108,11 @@ public class GooglePayUi implements IabBroadcastReceiver.IabBroadcastListener ,G
                 }
 
                 // Have we been disposed of in the meantime? If so, quit.
-                if (mHelper == null)
+                if (mHelper == null){
+                    setWaitScreen(false);
                     return;
+                }
+
 
                 // Important: Dynamically register for broadcast messages about updated purchases.
                 // We register the receiver here instead of as a <receiver> in the Manifest
@@ -158,6 +163,7 @@ public class GooglePayUi implements IabBroadcastReceiver.IabBroadcastListener ,G
                             try {
                                 mHelper.launchPurchaseFlow(activity, productId, RC_REQUEST,
                                         mPurchaseFinishedListener, bean.getData());
+                                setWaitScreen(false);
                             } catch (IabHelper.IabAsyncInProgressException e) {
                                 ToastUtils.showToast(activity,activity.getString(R.string.google_pay_net_fail));
                                 complain("Error launching purchase flow. Another async operation in progress.");
@@ -214,10 +220,21 @@ public class GooglePayUi implements IabBroadcastReceiver.IabBroadcastListener ,G
             // Check for gas delivery -- if we own gas, we should fill up the tank immediately
 
             final List<Purchase> purchases = new ArrayList<>();
+            for (int i = 0; i < productArr.length; i++) {
+                String s = productArr[i];
+                Purchase gasPurchase = inventory.getPurchase(s);
+                if (gasPurchase!=null) {
+                    purchases.add(gasPurchase);
+                }
+            }
 
-            Purchase gasPurchase = inventory.getPurchase(productId);
             try {
-                mHelper.consumeAsync(gasPurchase, mConsumeFinishedListener);
+                if(purchases.size()>0){
+                    mHelper.consumeAsync(purchases, mConsumeMultiFinishedListenerr);
+                }else{
+                    updateUi();
+                    setWaitScreen(false);
+                }
             } catch (IabHelper.IabAsyncInProgressException e) {
                 complain("Error consuming gas. Another async operation in progress.");
             }
@@ -291,7 +308,37 @@ public class GooglePayUi implements IabBroadcastReceiver.IabBroadcastListener ,G
     };
 
 
+    IabHelper.OnConsumeMultiFinishedListener mConsumeMultiFinishedListenerr = new IabHelper.OnConsumeMultiFinishedListener() {
 
+        @Override
+        public void onConsumeMultiFinished(List<Purchase> purchases, List<IabResult> results) {
+            Log.e(TAG, "Consumption finished. Purchase: " + purchases + ", result: " + results);
+
+            // if we were disposed of in the meantime, quit.
+            if (mHelper == null) return;
+
+            // We know this is the "gas" sku because it's the only one we consume,
+            // so we don't check which sku was consumed. If you have more than one
+            // sku, you probably should check...
+            for (int i = 0; i < results.size(); i++) {
+                IabResult result = results.get(i);
+                if (result.isSuccess()) {
+                    // successfully consumed, so we apply the effects of the item in our
+                    if (purchases.size() > i) {
+                        saveData(purchases.get(i));
+                    } else {
+                        Log.e("GooglePayActivity", "有问题你");
+                    }
+                } else {
+                    //complain("Error while consuming: " + result);
+                }
+            }
+
+            updateUi();
+            setWaitScreen(false);
+            Log.e(TAG, "End consumption flow.");
+        }
+    };
     //给钱
     @SuppressLint("CheckResult")
     private void saveData(final Purchase purchase) {
