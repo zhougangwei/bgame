@@ -249,6 +249,7 @@ public class GooglePayUi implements IabBroadcastReceiver.IabBroadcastListener ,G
 
             // if we were disposed of in the meantime, quit.
             if (mHelper == null){
+                setWaitScreen(false);
                 LogUtils.e(TAG, "mHelper " +"空了");
                 return;
             }
@@ -327,18 +328,18 @@ public class GooglePayUi implements IabBroadcastReceiver.IabBroadcastListener ,G
                     if (purchases.size() > i) {
                         saveData(purchases.get(i));
                     } else {
-                        Log.e("GooglePayActivity", "有问题你");
                     }
                 } else {
-                    //complain("Error while consuming: " + result);
                 }
             }
-
             updateUi();
             setWaitScreen(false);
             Log.e(TAG, "End consumption flow.");
         }
     };
+
+
+
     //给钱
     @SuppressLint("CheckResult")
     private void saveData(final Purchase purchase) {
