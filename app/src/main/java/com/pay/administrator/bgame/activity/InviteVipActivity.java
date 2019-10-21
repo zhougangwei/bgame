@@ -35,6 +35,7 @@ public class InviteVipActivity extends BaseActivity {
     @Override
     protected void initView() {
 
+
         RetrofitFactory.getInstance().getuserInfo()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -46,6 +47,7 @@ public class InviteVipActivity extends BaseActivity {
                             tvInviCode.setText(data.getInvCode());
                             int invitedNum = data.getInvitedNum();
                             //数目
+
 
                         }
                     }
