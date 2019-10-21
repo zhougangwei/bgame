@@ -95,7 +95,7 @@ public class UserInfo extends BaseBean {
         @SerializedName("regType")
         private int regType;
         @SerializedName("invCode")
-        private Object invCode;
+        private String invCode;
         @SerializedName("remanidCount")
         private int remanidCount;
         @SerializedName("invitedNum")
@@ -261,11 +261,11 @@ public class UserInfo extends BaseBean {
             this.regType = regType;
         }
 
-        public Object getInvCode() {
+        public String getInvCode() {
             return invCode;
         }
 
-        public void setInvCode(Object invCode) {
+        public void setInvCode(String invCode) {
             this.invCode = invCode;
         }
 
